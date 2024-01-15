@@ -1,2 +1,11 @@
-# fullstackopen.com
-Fullstack Dev Course 
+# Fullstack Open 
+
+![Logo](https://studies.helsinki.fi/api/courses/cur/image/sites/default/files/2021-05/fullstack_scaled_0.png)
+
+Deep Dive into modern web development with React, Redux, GraphQL, MongoDB and Typescript 
+
+## The Challenge 
+
+[Part 0](./0x00-part_zero/): Fundamentals of Web Applications 
+
+[Part 1](./0x01-part_one/): Introduction to React
