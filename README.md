@@ -1,7 +1,5 @@
 # Fullstack Open 
 
-![Logo](./fullstack.png)
-
 Deep Dive into modern web development with React, Redux, GraphQL, MongoDB and Typescript 
 
 ## The Challenge 
