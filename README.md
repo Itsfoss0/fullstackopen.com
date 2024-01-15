@@ -1,6 +1,6 @@
 # Fullstack Open 
 
-![Logo](https://studies.helsinki.fi/api/courses/cur/image/sites/default/files/2021-05/fullstack_scaled_0.png)
+![Logo](./fullstack.png)
 
 Deep Dive into modern web development with React, Redux, GraphQL, MongoDB and Typescript 
 
