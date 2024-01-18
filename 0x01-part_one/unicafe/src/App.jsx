@@ -6,6 +6,9 @@ const Header = ({ title }) => {
   return <h1>{title}</h1>
 }
 
+const Statistic = ({ statName, statVal }) => {
+  return (<div>{statName}: {statVal} </div>);
+}
 const Button = ({ feedBack, text, value }) => {
   return <button onClick={() => feedBack(value)}>{text}</button>
 }
@@ -31,12 +34,12 @@ const App = () => {
     <Button feedBack={updateFeedback} text="Neutral" value="neutral" />
     <Button feedBack={updateFeedback} text="Bad" value="bad" />
     <h2>Statistics</h2>
-    <div>Good {stats.good} </div>
-    <div>Bad {stats.bad} </div>
-    <div>Neutral {stats.neutral} </div>
-    <div>All {totalFB} </div>
-    <div>Average: {average}</div>
-    <div>Positive: {positive}%</div>
+    <Statistic statName="Good" statVal={stats.good}/>
+    <Statistic statName="Bad" statVal={stats.bad}/>
+    <Statistic statName="Neutral" statVal={stats.neutral}/>
+    <Statistic statName="All" statVal={totalFB}/>
+    <Statistic statName="Average" statVal={average}/>
+    <Statistic statName="Positive" statVal={positive + "%"}/>
   </>);
 }
 
