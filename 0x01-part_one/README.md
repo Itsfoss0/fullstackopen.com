@@ -1,27 +1,12 @@
-sequenceDiagram
-    participant browser
-    participant server
+## Fullstackopen  Projects
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
-    activate server
-    server-->>browser: HTML document
-    deactivate server
+This is part one of the fullstackopen course. In this section, we cover introduction to react, react components, props and how to manage state in react using the useState hook. 
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
-    activate server
-    server-->>browser: the css file
-    deactivate server
+## Resources 
+<!-- Add resources  -->
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
-    activate server
-    server-->>browser: the JavaScript file
-    deactivate server
+## Projects
 
-    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+1. [CourseInfo](./courseinfo/): Basic project describing the course outline for fullstackopen.com
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
-    activate server
-    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
-    deactivate server
-
-    Note right of browser: The browser executes the callback function that renders the notes
+2. [Unicafe](./unicafe/): A simple web app for a university cafe to gather feedback from students. 
