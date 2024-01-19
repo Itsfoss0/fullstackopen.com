@@ -7,7 +7,16 @@ const Header = ({ title }) => {
 };
 
 const StatisticLine = ({ statName, statVal }) => {
-  return (<div>{statName}: {statVal} </div>);
+  return (
+    <table>
+      <tbody>
+        <tr>
+          <td>{statName}</td>
+          <td>{statVal}</td>
+        </tr>
+      </tbody>
+    </table>
+  );
 };
 
 const Statistic = ({ props }) => {
@@ -58,11 +67,10 @@ const App = () => {
       {totalFB > 0
         ? (
           <Statistic props={stateInfo} />
-        )
+          )
         : (
           <div>No feedback given</div>
-        )}
-
+          )}
     </>
   );
 };
