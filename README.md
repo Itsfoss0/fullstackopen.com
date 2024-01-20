@@ -7,3 +7,6 @@ Deep Dive into modern web development with React, Redux, GraphQL, MongoDB and Ty
 [Part 0](./0x00-part_zero/): Fundamentals of Web Applications 
 
 [Part 1](./0x01-part_one/): Introduction to React
+
+[Part 2](./0x02-part_two/): React Component, Props and antipatterns
+
