@@ -40,7 +40,7 @@ const App = () => {
         contactServices
           .modifyContact({ ...personToUpdate, number: newNumber })
           .then(response => {
-            setPersons(persons.concat(response.data));
+            setPersons(persons.filter(person => person.id !== personToUpdate.id).concat(response.data));
             setNewName('');
             setNewNumber('');
           })

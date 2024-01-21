@@ -15,7 +15,7 @@ const deleteContactById = (contactId) => {
 };
 
 const modifyContact = (newContact) => {
-  return axios.put(`${url}/${newContact.id}`);
+  return axios.put(`${url}/${newContact.id}`, newContact);
 };
 export default {
   getAllContacts,
