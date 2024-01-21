@@ -1,13 +1,12 @@
-const PhoneBook = ({ persons }) => {
+const PhoneBookEntry = ({ person, deletePerson }) => {
   return (
     <>
-      {persons.map((person) => (
-        <div key={person.id}>
-          {person.name}: {person.number}
-        </div>
-      ))}
+      <div>
+        {person.name}: {person.number} <span />
+        <button onClick={deletePerson}> Delete </button>
+      </div>
+
     </>
   );
 };
-
-export default PhoneBook;
+export default PhoneBookEntry;
