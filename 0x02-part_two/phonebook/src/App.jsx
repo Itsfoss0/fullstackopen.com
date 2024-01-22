@@ -1,21 +1,24 @@
 import { useState, useEffect } from 'react';
 import Filter from './components/Filter';
 import Header from './components/Header';
+import Notification from './components/Notification';
 import PersonForm from './components/PersonForm';
 import PhoneBookEntry from './components/PhoneBook';
 import contactServices from './services/contacts';
+import './components/notifications.css'
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [filter, setFilter] = useState('');
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     contactServices
       .getAllContacts()
       .then((response) => setPersons(response.data))
-      .catch((error) => console.error('Error fetching data:', error));
+      .catch((error) => setMessage(error.message));
   }, []);
 
   const updateFilter = (event) => {
@@ -43,8 +46,9 @@ const App = () => {
             setPersons(persons.filter(person => person.id !== personToUpdate.id).concat(response.data));
             setNewName('');
             setNewNumber('');
+            setMessage(`Updated ${response.data.name}`)
           })
-          .catch(err => console.error(err.message));
+          .catch(err => setMessage(err.message));
       }
       return;
     }
@@ -61,8 +65,9 @@ const App = () => {
         setPersons(persons.concat(response.data));
         setNewName('');
         setNewNumber('');
+        setMessage(`Added ${response.data.name}`)
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => setMessage(err.message));
   };
 
   const deletePerson = (nId) => {
@@ -84,6 +89,7 @@ const App = () => {
   return (
     <>
       <Header title='Phone Book' />
+      <Notification message={message} type="success" />
       <Filter filter={filter} updateFilter={updateFilter} />
       <PersonForm
         addName={addName}
