@@ -1,0 +1,44 @@
+GET http://localhost:1337/api/persons
+
+GET http://localhost:1337/api/persons/1
+
+DELETE http://localhost:1337/api/persons/3
+
+GET http://localhost:1337/api/persons/5
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "name": "Holga Kilgore",
+    "number": "1337x"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "name": "Shelock Holmes",
+    "number": "221B"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "name": "John Doe",
+    "number": "339"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "name": "Gold Eagle Actual",
+    "number": "17589"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "number": "17589"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
