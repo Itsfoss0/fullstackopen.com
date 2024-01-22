@@ -2,6 +2,8 @@
 
 const express = require('express');
 const { undefinedRouteHandler } = require('./middleware/errorHandlers');
+const { loggerMidleware } = require('./middleware/logging');
+
 const { generateId } = require('./utils/utils');
 
 const PORT = 1337;
@@ -30,7 +32,9 @@ let persons = [
 ];
 
 const app = express();
+
 app.use(express.json());
+app.use(loggerMidleware);
 
 app.get('/info', (request, response) => {
   const date = new Date().toString();
