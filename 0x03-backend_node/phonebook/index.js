@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const express = require("express");
+const cors = require('cors')
 const { undefinedRouteHandler } = require("./middleware/errorHandlers");
 const { loggerMidleware } = require("./middleware/logging");
 
@@ -33,6 +34,7 @@ let persons = [
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(loggerMidleware);
 
@@ -81,7 +83,7 @@ app.post("/api/persons", (request, response) => {
       return response.json(newPerson);
     }
     return response
-      .status(402)
+      .status(409)
       .json({ error: "Person with that name already exists" });
   }
   return response
