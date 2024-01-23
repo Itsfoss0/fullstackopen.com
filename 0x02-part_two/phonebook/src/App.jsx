@@ -5,14 +5,14 @@ import Notification from './components/Notification';
 import PersonForm from './components/PersonForm';
 import PhoneBookEntry from './components/PhoneBook';
 import contactServices from './services/contacts';
-import './components/notifications.css'
+import './components/notifications.css';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [filter, setFilter] = useState('');
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     contactServices
@@ -46,7 +46,7 @@ const App = () => {
             setPersons(persons.filter(person => person.id !== personToUpdate.id).concat(response.data));
             setNewName('');
             setNewNumber('');
-            setMessage(`Updated ${response.data.name}`)
+            setMessage(`Updated ${response.data.name}`);
           })
           .catch(err => setMessage(err.message));
       }
@@ -65,7 +65,7 @@ const App = () => {
         setPersons(persons.concat(response.data));
         setNewName('');
         setNewNumber('');
-        setMessage(`Added ${response.data.name}`)
+        setMessage(`Added ${response.data.name}`);
       })
       .catch((err) => setMessage(err.message));
   };
@@ -77,12 +77,11 @@ const App = () => {
       contactServices
         .deleteContactById(nId)
         .then(response => {
-          setPersons(persons.filter(person => person.id !== response.data.id))
+          setPersons(persons.filter(person => person.id !== response.data.id));
         })
-        .catch(err => setMessage(err.message))
+        .catch(err => setMessage(err.message));
     }
   };
-
 
   const filteredContacts =
     filter === ''
@@ -92,7 +91,7 @@ const App = () => {
   return (
     <>
       <Header title='Phone Book' />
-      <Notification message={message} type="success" />
+      <Notification message={message} type='success' />
       <Filter filter={filter} updateFilter={updateFilter} />
       <PersonForm
         addName={addName}
