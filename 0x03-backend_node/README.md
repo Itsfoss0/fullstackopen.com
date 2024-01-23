@@ -6,3 +6,7 @@ In this section of the course, we explore backend programming, with the nodejs r
 
 
 __Projects__
+Fullstack phonebook : https://fsopen-api-1.onrender.com/
+Backend Phonebook: https://fsopen-api-1.onrender.com/api/persons
+
+
