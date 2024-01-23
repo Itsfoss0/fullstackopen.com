@@ -56,7 +56,7 @@ const App = () => {
     const newPersonObj = {
       name: newName,
       number: newNumber,
-      id: (persons.length + 1).toString()
+      id: (persons.length + 1)
     };
 
     contactServices
@@ -71,15 +71,18 @@ const App = () => {
   };
 
   const deletePerson = (nId) => {
-    const personToDelete = persons.find(person => person.id === nId);
+    const personToDelete = persons.find((person) => person.id === nId);
+
     if (window.confirm(`Are you sure you want to delete ${personToDelete.name}`)) {
       contactServices
         .deleteContactById(nId)
         .then(response => {
-          setPersons(persons.filter(person => person.id !== response.data.id));
-        });
+          setPersons(persons.filter(person => person.id !== response.data.id))
+        })
+        .catch(err => setMessage(err.message))
     }
   };
+
 
   const filteredContacts =
     filter === ''
