@@ -4,7 +4,8 @@
 
 const mongoose = require('mongoose');
 
-const MONGO_URI = process.argv[2];
+const PASSWORD = process.argv[2];
+const MONGO_URI = `mongodb+srv://itsfoss:${PASSWORD}@fullstackopen.9koiyy6.mongodb.net/?retryWrites=true&w=majority`;
 
 const connection = mongoose
   .connect(MONGO_URI)
