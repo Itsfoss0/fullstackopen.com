@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const PASSWORD = process.argv[2];
 const MONGO_URI = `mongodb+srv://itsfoss:${PASSWORD}@fullstackopen.9koiyy6.mongodb.net/?retryWrites=true&w=majority`;
 
-const connection = mongoose
+mongoose
   .connect(MONGO_URI)
   .catch((err) => console.error(err.message));
 
