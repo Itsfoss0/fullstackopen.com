@@ -1,6 +1,6 @@
 GET http://localhost:1337/api/persons
 
-GET http://localhost:1337/api/persons/65b2f308a634faf757a8debb
+GET http://localhost:1337/api/persons/65b2f35ca0e1d35e671f132c
 
 
 
