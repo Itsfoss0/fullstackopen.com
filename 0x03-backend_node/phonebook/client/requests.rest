@@ -1,10 +1,8 @@
 GET http://localhost:1337/api/persons
 
-GET http://localhost:1337/api/persons/1
+GET http://localhost:1337/api/persons/65b2f308a634faf757a8debb
 
-DELETE http://localhost:1337/api/persons/3
 
-GET http://localhost:1337/api/persons/5
 
 POST http://localhost:1337/api/persons
 Content-Type: application/json
@@ -37,8 +35,62 @@ Content-Type: application/json
 POST http://localhost:1337/api/persons
 Content-Type: application/json
 {
+    "name": "Bravo Six",
+    "number": "2189448"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "name": "Kilo one Actual",
+    "number": "124589"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "name": "Outlaw two five",
     "number": "17589"
 }
 
 POST http://localhost:1337/api/persons
 Content-Type: application/json
+{
+    "name": "Deadly four Niner",
+    "number": "17589"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "name": "Hunter One",
+    "number": "17232589"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "name": "Damon Salvatore",
+    "number": "17239589"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "name": "Mongoose two",
+    "number": "17589"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+{
+    "number": "17589"
+}
+
+POST http://localhost:1337/api/persons
+Content-Type: application/json
+
+
+DELETE  http://localhost:1337/api/persons/65b2f308a634faf757a8debb
+
+DELETE  http://localhost:1337/api/persons/65b2f31a1dfb830f3bcfaf93
