@@ -1,8 +1,28 @@
 GET http://localhost:1337/api/persons
 
-GET http://localhost:1337/api/persons/65b2f35ca0e1d35e671f132c
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 902
+etag: W/"386-X47tMm+E+fc/mhqHvWR4NlvzEU0"
+date: Fri, 26 Jan 2024 14:20:36 GMT
+connection: close
 
+###
 
+GET http://localhost:1337/api/persons/65b1410752883227336b12cc
+
+HTTP/1.1 200  - OK
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 75
+etag: W/"4b-KUndsbyk3fxOjSPrF8f8T12J83s"
+date: Fri, 26 Jan 2024 14:20:45 GMT
+connection: close
+
+###
 
 POST http://localhost:1337/api/persons
 Content-Type: application/json
@@ -11,12 +31,27 @@ Content-Type: application/json
     "number": "1337x"
 }
 
+
+HTTP/1.1 409  - Conflict
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 48
+etag: W/"30-gJ6Ldvk94DtREp0R2yDRBGqjDho"
+date: Fri, 26 Jan 2024 14:20:30 GMT
+connection: close
+
+###
+
 POST http://localhost:1337/api/persons
 Content-Type: application/json
 {
     "name": "Shelock Holmes",
     "number": "221B"
 }
+
+
+###
 
 POST http://localhost:1337/api/persons
 Content-Type: application/json
@@ -25,12 +60,18 @@ Content-Type: application/json
     "number": "339"
 }
 
+
+###
+
 POST http://localhost:1337/api/persons
 Content-Type: application/json
 {
     "name": "Gold Eagle Actual",
     "number": "17589"
 }
+
+
+###
 
 POST http://localhost:1337/api/persons
 Content-Type: application/json
@@ -39,12 +80,18 @@ Content-Type: application/json
     "number": "2189448"
 }
 
+
+###
+
 POST http://localhost:1337/api/persons
 Content-Type: application/json
 {
     "name": "Kilo one Actual",
     "number": "124589"
 }
+
+
+###
 
 POST http://localhost:1337/api/persons
 Content-Type: application/json
@@ -53,12 +100,18 @@ Content-Type: application/json
     "number": "17589"
 }
 
+
+###
+
 POST http://localhost:1337/api/persons
 Content-Type: application/json
 {
     "name": "Deadly four Niner",
     "number": "17589"
 }
+
+
+###
 
 POST http://localhost:1337/api/persons
 Content-Type: application/json
@@ -67,12 +120,18 @@ Content-Type: application/json
     "number": "17232589"
 }
 
+
+###
+
 POST http://localhost:1337/api/persons
 Content-Type: application/json
 {
     "name": "Damon Salvatore",
     "number": "17239589"
 }
+
+
+###
 
 POST http://localhost:1337/api/persons
 Content-Type: application/json
@@ -81,16 +140,43 @@ Content-Type: application/json
     "number": "17589"
 }
 
+
+###
+
 POST http://localhost:1337/api/persons
 Content-Type: application/json
 {
     "number": "17589"
 }
 
+
+###
+
 POST http://localhost:1337/api/persons
 Content-Type: application/json
 
+###
 
 DELETE  http://localhost:1337/api/persons/65b2f308a634faf757a8debb
 
+HTTP/1.1 404  - Not Found
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 28
+etag: W/"1c-mD5BEMcU6mt6/Aej7M1TS3e6KBk"
+date: Fri, 26 Jan 2024 14:20:13 GMT
+connection: close
+
+###
+
 DELETE  http://localhost:1337/api/persons/65b2f31a1dfb830f3bcfaf93
+
+HTTP/1.1 404  - Not Found
+x-powered-by: Express
+access-control-allow-origin: *
+content-type: application/json; charset=utf-8
+content-length: 28
+etag: W/"1c-mD5BEMcU6mt6/Aej7M1TS3e6KBk"
+date: Fri, 26 Jan 2024 14:20:18 GMT
+connection: close
