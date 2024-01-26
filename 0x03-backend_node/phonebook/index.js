@@ -64,7 +64,7 @@ app.post("/api/persons", async (request, response) => {
     try {
       const person = await Person.findOne({ name: body.name });
 
-      if (person === null) {
+      if (!person) {
         const newPerson = new Person({
           name: body.name,
           number: body.number,
