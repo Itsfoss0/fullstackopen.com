@@ -1,95 +1,91 @@
 #!/usr/bin/env node
 
-const express = require('express');
-const cors = require('cors');
-const { undefinedRouteHandler } = require('./middleware/errorHandlers');
-const { loggerMidleware } = require('./middleware/logging');
+const express = require("express");
+const cors = require("cors");
 
-const { generateId } = require('./utils/utils');
+const { undefinedRouteHandler } = require("./middleware/errorHandlers");
+const { loggerMidleware } = require("./middleware/logging");
+const Person = require("./models/person");
 
 const PORT = process.env.PORT || 1337;
 
-let persons = [
-  {
-    id: 1,
-    name: 'Arto Hellas',
-    number: '040-123456'
-  },
-  {
-    id: 2,
-    name: 'Ada Lovelace',
-    number: '39-44-5323523'
-  },
-  {
-    id: 3,
-    name: 'Dan Abramov',
-    number: '12-43-234345'
-  },
-  {
-    id: 4,
-    name: 'Mary Poppendieck',
-    number: '39-23-6423122'
-  }
-];
-
 const app = express();
 
-app.use(express.static('dist'))
+app.use(express.static("dist"));
 app.use(cors());
 app.use(express.json());
 app.use(loggerMidleware);
 
-app.get('/info', (request, response) => {
+app.get("/info", async (request, response) => {
   const date = new Date().toString();
-  const personsCount = persons.length;
+  const personsCount = await Person.countDocuments({});
   response.send(
     `<p> Phonebook has info for ${personsCount} people <br/> ${date} </p>`
   );
 });
 
-app.get('/api/persons', (request, response) => {
-  return response.json(persons);
+app.get("/api/persons", async (request, response) => {
+  const allPerson = await Person.find({});
+  return response.json(allPerson);
 });
 
-app.get('/api/persons/:id', (request, response) => {
-  const personId = Number(request.params.id);
-  const person = persons.find((person) => person.id === personId);
+app.get("/api/persons/:id", async (request, response) => {
+  const personId = request.params.id;
+  const person = await Person.findById(personId);
   if (person) {
     return response.json(person);
   }
-  return response.status(404).json({ error: 'No person found' });
+  return response.status(404).json({ error: "No person found" });
 });
 
-app.delete('/api/persons/:id', (request, response) => {
-  const personId = Number(request.params.id);
-  const personToDelete = persons.find((person) => person.id === personId);
+app.delete("/api/persons/:id", async (request, response) => {
+  /* the frontend does need the deleted resource
+     to update the state.
+     so we get  the resource before deleting it
+     and send the it on delete instead of the usual 204
+  */
+  const personId = request.params.id;
+  const personToDelete = await Person.findById(personId);
   if (personToDelete) {
-    persons = persons.filter((person) => person.id !== personToDelete.id);
-    return response.json(personToDelete);
+    try {
+      await Person.deleteOne({ _id: personId });
+      return response.json(personToDelete);
+    } catch (err) {
+      return response.status(500).json({ error: "Interal server error" });
+    }
   }
-  return response.status(404).json({ error: 'person not found' });
+  return response.status(404).json({ error: "person not found" });
 });
 
-app.post('/api/persons', (request, response) => {
+app.post("/api/persons", async (request, response) => {
   const body = request.body;
+
   if (body.name && body.number) {
-    const person = persons.find((psn) => psn.name === body.name);
-    if (!person) {
-      const newPerson = {
-        name: body.name,
-        number: body.number,
-        id: generateId(persons)
-      };
-      persons = persons.concat(newPerson);
-      return response.json(newPerson);
+    try {
+      const person = await Person.findOne({ name: body.name });
+
+      if (person === null) {
+        const newPerson = new Person({
+          name: body.name,
+          number: body.number,
+        });
+
+        await newPerson.save();
+        return response.json(newPerson);
+      } else {
+        return response
+          .status(409)
+          .json({ error: "Person with that name already exists" });
+      }
+    } catch (error) {
+      console.error(error);
+      return response.status(500).json({ error: "Internal server error" });
     }
+  } else {
     return response
-      .status(409)
-      .json({ error: 'Person with that name already exists' });
+      .status(400)
+      .json({ error: "Name or number not specified in the request" });
   }
-  return response
-    .status(400)
-    .json({ error: 'name or number not specified in the reqeust' });
 });
 
 app.use(undefinedRouteHandler);
