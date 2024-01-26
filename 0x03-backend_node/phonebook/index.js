@@ -51,7 +51,8 @@ app.put('/api/persons/:id', async (request, response, next) => {
     const personId = request.params.id;
 
     const updatedPerson = await Person.findByIdAndUpdate(personId, person, {
-      new: true
+      new: true,
+      runValidators: true
     });
     return response.json(updatedPerson);
   } catch (err) {
@@ -98,8 +99,7 @@ app.post('/api/persons', async (request, response) => {
           .json({ error: 'Person with that name already exists' });
       }
     } catch (error) {
-      console.error(error);
-      return response.status(500).json({ error: 'Internal server error' });
+      return response.status(400).json({ error: error.message });
     }
   } else {
     return response
