@@ -1,22 +1,25 @@
 #!/usr/bin/env node
 
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
 
-const { undefinedRouteHandler } = require("./middleware/errorHandlers");
-const { loggerMidleware } = require("./middleware/logging");
-const Person = require("./models/person");
+const {
+  undefinedRouteHandler,
+  malformedIdError
+} = require('./middleware/errorHandlers');
+const { loggerMidleware } = require('./middleware/logging');
+const Person = require('./models/person');
 
 const PORT = process.env.PORT || 1337;
 
 const app = express();
 
-app.use(express.static("dist"));
+app.use(express.static('dist'));
 app.use(cors());
 app.use(express.json());
 app.use(loggerMidleware);
 
-app.get("/info", async (request, response) => {
+app.get('/info', async (request, response) => {
   const date = new Date().toString();
   const personsCount = await Person.countDocuments({});
   response.send(
@@ -24,21 +27,38 @@ app.get("/info", async (request, response) => {
   );
 });
 
-app.get("/api/persons", async (request, response) => {
+app.get('/api/persons', async (request, response) => {
   const allPerson = await Person.find({});
   return response.json(allPerson);
 });
 
-app.get("/api/persons/:id", async (request, response) => {
+app.get('/api/persons/:id', async (request, response) => {
   const personId = request.params.id;
   const person = await Person.findById(personId);
   if (person) {
     return response.json(person);
   }
-  return response.status(404).json({ error: "No person found" });
+  return response.status(404).json({ error: 'No person found' });
 });
 
-app.delete("/api/persons/:id", async (request, response) => {
+app.put('/api/persons/:id', async (request, response, next) => {
+  try {
+    const body = request.body;
+    const person = {
+      name: body.name,
+      number: body.number
+    };
+    const personId = request.params.id;
+
+    const updatedPerson = await Person.findByIdAndUpdate(personId, person, {
+      new: true
+    });
+    return response.json(updatedPerson);
+  } catch (err) {
+    return next(err);
+  }
+});
+app.delete('/api/persons/:id', async (request, response) => {
   /* the frontend does need the deleted resource
      to update the state.
      so we get  the resource before deleting it
@@ -51,13 +71,13 @@ app.delete("/api/persons/:id", async (request, response) => {
       await Person.deleteOne({ _id: personId });
       return response.json(personToDelete);
     } catch (err) {
-      return response.status(500).json({ error: "Interal server error" });
+      return response.status(500).json({ error: 'Interal server error' });
     }
   }
-  return response.status(404).json({ error: "person not found" });
+  return response.status(404).json({ error: 'person not found' });
 });
 
-app.post("/api/persons", async (request, response) => {
+app.post('/api/persons', async (request, response) => {
   const body = request.body;
 
   if (body.name && body.number) {
@@ -67,7 +87,7 @@ app.post("/api/persons", async (request, response) => {
       if (!person) {
         const newPerson = new Person({
           name: body.name,
-          number: body.number,
+          number: body.number
         });
 
         await newPerson.save();
@@ -75,19 +95,20 @@ app.post("/api/persons", async (request, response) => {
       } else {
         return response
           .status(409)
-          .json({ error: "Person with that name already exists" });
+          .json({ error: 'Person with that name already exists' });
       }
     } catch (error) {
       console.error(error);
-      return response.status(500).json({ error: "Internal server error" });
+      return response.status(500).json({ error: 'Internal server error' });
     }
   } else {
     return response
       .status(400)
-      .json({ error: "Name or number not specified in the request" });
+      .json({ error: 'Name or number not specified in the request' });
   }
 });
 
+app.use(malformedIdError);
 app.use(undefinedRouteHandler);
 
 app.listen(PORT, () => {
