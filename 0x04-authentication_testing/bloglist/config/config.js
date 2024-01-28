@@ -1,9 +1,9 @@
-#!/usr/bin/env node 
+#!/usr/bin/env node
 
-const MONGO_URI = process.env.MONGO_URI
-const PORT = process.env.PORT
+const MONGO_URI = process.env.MONGO_URI;
+const PORT = process.env.PORT;
 
 module.exports = {
-    MONGO_URI,
-    PORT
-}
+  MONGO_URI,
+  PORT
+};
