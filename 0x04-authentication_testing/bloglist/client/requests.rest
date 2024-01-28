@@ -1,0 +1,26 @@
+GET http://localhost:1337/api/blogs
+GET http://localhost:1337/api/blogs/65b66ae388ec4fe72ce13cb3
+
+POST http://localhost:1337/api/blogs
+Content-Type: application/json
+{
+    "author": "Holga Kilgore",
+    "url": "https://github.com/Itsfoss0",
+    "title": "Getting good at git"
+}
+
+POST http://localhost:1337/api/blogs
+Content-Type: application/json
+{
+    "author": "Sherlock Holmes",
+    "url": "itsfoss0.hashnode.dev",
+    "title": "What is systemd"
+}
+
+POST http://localhost:1337/api/blogs
+Content-Type: application/json
+{
+    "author": "Jane Doe",
+    "url": "medium.com/docker-compose",
+    "title": "Docker compose for all"
+}
