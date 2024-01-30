@@ -1,4 +1,5 @@
 GET http://localhost:1337/api/blogs
+
 GET http://localhost:1337/api/blogs/65b66ae388ec4fe72ce13cb3
 
 POST http://localhost:1337/api/blogs
@@ -7,6 +8,14 @@ Content-Type: application/json
     "author": "Holga Kilgore",
     "url": "https://github.com/Itsfoss0",
     "title": "Getting good at git"
+}
+
+POST http://localhost:1337/api/blogs
+Content-Type: application/json
+{
+    "author": "Robert Greene",
+    "url": "https://foo.bar.baz",
+    "title": "Foo Bar"
 }
 
 POST http://localhost:1337/api/blogs
