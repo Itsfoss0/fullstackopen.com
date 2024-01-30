@@ -1,6 +1,6 @@
 GET http://localhost:1337/api/blogs
 
-GET http://localhost:1337/api/blogs/65b66ae388ec4fe72ce13cb3
+GET   http://localhost:1337/api/blogs/65b66ae388ec4fe72ce13cb3
 
 POST http://localhost:1337/api/blogs
 Content-Type: application/json
@@ -18,18 +18,18 @@ Content-Type: application/json
     "title": "Foo Bar"
 }
 
-POST http://localhost:1337/api/blogs
+PUT  http://localhost:1337/api/blogs/65b66a44436d1a52803238a8
 Content-Type: application/json
 {
     "author": "Sherlock Holmes",
     "url": "itsfoss0.hashnode.dev",
-    "title": "What is systemd"
+    "title": "What is systemd",
+    "likes": 3
 }
 
 POST http://localhost:1337/api/blogs
 Content-Type: application/json
 {
     "author": "Jane Doe",
-    "url": "medium.com/docker-compose",
     "title": "Docker compose for all"
 }
