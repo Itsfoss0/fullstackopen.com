@@ -2,7 +2,7 @@
 
 /* dummy helper utility functions for the blog */
 
-const _ = require("lodash");
+const _ = require('lodash');
 
 const dummy = (blogs) => {
   return 1;
@@ -24,7 +24,7 @@ const favoriteBlog = (blogs) => {
 };
 
 const mostBlogs = (blogs) => {
-  const groupedBlogs = _.groupBy(blogs, "author");
+  const groupedBlogs = _.groupBy(blogs, 'author');
   const authorWithMostBlogs = _.maxBy(
     Object.keys(groupedBlogs),
     (author) => groupedBlogs[author].length
@@ -34,7 +34,7 @@ const mostBlogs = (blogs) => {
   );
   return {
     author: authorWithMostBlogs,
-    blogs: blogsAuthored.length,
+    blogs: blogsAuthored.length
   };
 };
 
@@ -42,5 +42,5 @@ module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  mostBlogs,
+  mostBlogs
 };
