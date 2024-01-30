@@ -6,6 +6,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
+require("express-async-errors")
 const blogRouter = require('./controllers/blogs');
 const { undefinedRouteHandler } = require('./middleware/errors');
 const { MONGO_URI } = require('./config/config');
