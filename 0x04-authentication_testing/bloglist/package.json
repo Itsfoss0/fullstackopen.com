@@ -4,20 +4,24 @@
   "description": "application that allows users to list their favourite blogs",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "test": "jest --verbose"
+    "dev": "NODE_ENV=dev nodemon index.js",
+    "start": "NODE_ENV=prod node index.js",
+    "test": "NODE_ENV=test jest --verbose"
   },
   "author": "Itsfoss0",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "lodash": "^4.17.21",
     "mongoose": "^7.6.5",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "supertest": "^6.3.4"
   },
   "jest": {
     "testEnvironment": "node"

@@ -2,6 +2,8 @@
 
 /* dummy helper utility functions for the blog */
 
+const _ = require("lodash");
+
 const dummy = (blogs) => {
   return 1;
 };
@@ -20,8 +22,25 @@ const favoriteBlog = (blogs) => {
   }, blogs[0]);
   return favBlog;
 };
+
+const mostBlogs = (blogs) => {
+  const groupedBlogs = _.groupBy(blogs, "author");
+  const authorWithMostBlogs = _.maxBy(
+    Object.keys(groupedBlogs),
+    (author) => groupedBlogs[author].length
+  );
+  const blogsAuthored = blogs.filter(
+    (blog) => blog.author === authorWithMostBlogs
+  );
+  return {
+    author: authorWithMostBlogs,
+    blogs: blogsAuthored.length,
+  };
+};
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
+  mostBlogs,
 };
