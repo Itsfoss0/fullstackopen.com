@@ -2,7 +2,12 @@
 
 /* unittest for the utilty helper functions */
 
-const { dummy, totalLikes, favoriteBlog } = require("../utils/list_helper");
+const {
+  dummy,
+  totalLikes,
+  favoriteBlog,
+  mostBlogs,
+} = require("../utils/list_helper");
 
 test("dummy returns one", () => {
   const blogs = [];
@@ -45,5 +50,20 @@ describe("Favorite Blog", () => {
   test("when list doesn't have any blogs, is none", () => {
     const blogs = [];
     expect(favoriteBlog(blogs)).toEqual(blogs[0]);
+  });
+});
+
+describe("Author", () => {
+  test("with the most blogs", () => {
+    const blogs = [
+      { author: "Robert Greene" },
+      { author: "Robert Greene" },
+      { author: "Robert Greene" },
+      { author: "Maxweel Lord" },
+      { author: "Sir. Author Conan Doyle" },
+    ];
+
+    const expected = { author: "Robert Greene", blogs: 3 };
+    expect(mostBlogs(blogs)).toEqual(expected);
   });
 });
