@@ -91,4 +91,11 @@ describe("API", () => {
       .expect(200)
       .expect("Content-Type", /json/);
   });
+
+  test("oders blogs correctly on response", async () => {
+    const response = await api.get("/api/blogs");
+    expect(response.status).toEqual(200);
+    expect(response.headers["content-type"]).toContain("json");
+    expect(response.body[0].title).toEqual(blogs[0].title);
+  });
 });
