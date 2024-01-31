@@ -1,4 +1,4 @@
-GET http://localhost:1337/api/blogs
+GET http://localhost:1337/api/
 
 GET   http://localhost:1337/api/blogs/65b66ae388ec4fe72ce13cb3
 
