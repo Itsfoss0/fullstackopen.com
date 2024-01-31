@@ -98,4 +98,9 @@ describe('API', () => {
     expect(response.headers['content-type']).toContain('json');
     expect(response.body[0].title).toEqual(blogs[0].title);
   });
+
+  test("handles undefined routes correclty", async () =>{
+    await api.get("/api/foo")
+      .expect(404)
+  })
 });
