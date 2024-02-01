@@ -33,3 +33,14 @@ Content-Type: application/json
     "author": "Jane Doe",
     "title": "Docker compose for all"
 }
+
+
+GET http://localhost:1337/api/users
+
+POST http://localhost:1337/api/users
+Content-Type: application/json
+{
+    "username": "holgaK",
+    "name": "Holga Kilgore",
+    "password": "holga"
+}
