@@ -44,3 +44,26 @@ Content-Type: application/json
     "name": "Holga Kilgore",
     "password": "holga"
 }
+
+POST http://localhost:1337/api/users
+Content-Type: application/json
+{
+    "username": "sherlock",
+    "name": "Sherlock Holmes",
+    "password": "sholmes"
+}
+
+POST http://localhost:1337/api/users
+Content-Type: application/json
+{
+    "username": "eagleG",
+    "name": "Gold Eagle Actual",
+    "password": "bravosix"
+}
+
+POST http://localhost:1337/api/auth/login
+Content-Type: application/json
+{
+    "username": "eagleG",
+    "password": "bravosix"
+}
