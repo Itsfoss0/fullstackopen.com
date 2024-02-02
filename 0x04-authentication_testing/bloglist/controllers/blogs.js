@@ -2,9 +2,12 @@
 
 /* Router for the api/blogs endpoint */
 
+const jwt = require('jsonwebtoken');
 const blogRouter = require('express').Router();
 const Blog = require('../models/blog');
 const User = require('../models/user');
+const getTokenFrom = require('../utils/auth');
+const { JWT_SECRET_KEY } = require('./../config/config');
 
 blogRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({}).populate('user', {
@@ -33,16 +36,23 @@ blogRouter.delete('/:id', async (request, response) => {
 });
 
 blogRouter.post('/', async (request, response) => {
-  const users = await User.find({});
-  const user = users[0];
+  const token = getTokenFrom(request);
+  if (!token) {
+    return response
+      .status(403)
+      .json({ error: 'unauthorized, login and try again' });
+  }
+  const decodedToken = jwt.verify(token, JWT_SECRET_KEY);
+  const userId = decodedToken.userId;
   const body = request.body;
   const blog = new Blog({
     author: body.author,
     title: body.title,
     url: body.url,
-    user: user._id
+    user: userId
   });
   await blog.save();
+  const user = await User.findById(userId);
   user.blogs = user.blogs.concat(blog._id);
   await user.save();
   return response.status(201).json(blog);

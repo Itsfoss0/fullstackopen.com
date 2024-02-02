@@ -4,7 +4,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-const { JWT_SECRET_KEY } = require('./../config/config');
+const { JWT_SECRET_KEY } = require('../config/config');
 const authRouter = require('express').Router();
 
 authRouter.post('/login', async (request, response) => {
