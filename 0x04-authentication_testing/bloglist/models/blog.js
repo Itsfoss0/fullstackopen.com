@@ -20,12 +20,10 @@ const blogSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  user: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: 'User'
-    }
-  ]
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 blogSchema.set('toJSON', {

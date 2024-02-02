@@ -3,6 +3,7 @@
 /* error handler middlewares */
 
 const undefinedRouteHandler = (error, request, response, next) => {
+  console.log(error);
   if (error.name === 'CastError') {
     return response
       .status(400)
