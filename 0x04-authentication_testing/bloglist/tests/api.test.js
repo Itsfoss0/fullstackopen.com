@@ -149,4 +149,28 @@ describe('User', () => {
     expect(resp.status).toEqual(200);
     expect(resp.body).toHaveProperty('accessToken');
   });
+
+  test('cannot login with incorrect credentials', async () => {
+    const user = {
+      username: '@sherlockHolmesActual',
+      password: 'Sherlock',
+      name: 'Holmes'
+    };
+
+    const wrongUser = { username: user.username, password: 'wrongpassword' };
+    await api.post('/api/users').send(user).expect(201);
+    const resp = await api.post('/api/auth/login').send(wrongUser);
+    expect(resp.status).toEqual(401);
+  });
+
+  test("cannot login if the username doesn't exist", async () => {
+    const user = {
+      username: '@GoldEagleActual',
+      password: 'goldEagle',
+      name: 'Sherlock Holmes'
+    };
+    const resp = await api.post('/api/auth/login').send(user);
+    expect(resp.status).toEqual(404);
+    expect(resp.body).toHaveProperty('error');
+  });
 });
