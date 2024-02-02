@@ -10,7 +10,7 @@ const undefinedRouteHandler = (error, request, response, next) => {
   } else if (error.name === 'ValidationError') {
     return response
       .status(400)
-      .json({ error: 'Missing title or url in the body' });
+      .json({ error: 'bad request' });
   } else if (error.name === 'MongoServerError') {
     return response
       .status(409)
