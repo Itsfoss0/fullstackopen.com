@@ -138,6 +138,15 @@ describe('User', () => {
     expect(resp.headers['content-type']).toContain('json');
   });
 
+  test('name and username must be alteast 3 characters', async () => {
+    const badUser = {
+      username: 'G',
+      password: 'HolgaKilgore',
+      name: 'so'
+    };
+    await api.post('/api/users').send(badUser).expect(400);
+  });
+
   test('can login succesfully with correct credentials', async () => {
     const user = {
       username: '@sherlockHolmes',

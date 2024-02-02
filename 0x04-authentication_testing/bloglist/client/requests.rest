@@ -56,8 +56,8 @@ Content-Type: application/json
 POST http://localhost:1337/api/users
 Content-Type: application/json
 {
-    "username": "eagleG",
-    "name": "Gold Eagle Actual",
+    "username":"D",
+    "name": "Go",
     "password": "bravosix"
 }
 
