@@ -8,10 +8,14 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    minLength: 3,
+    unique: true,
+    message: `{VALUE} is already taken, try a different one`,
   },
   name: {
     type: String,
     required: true,
+    minLenght: 3,
   },
   passwordHash: {
     type: String,
