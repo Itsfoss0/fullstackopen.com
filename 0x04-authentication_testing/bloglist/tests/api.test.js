@@ -116,4 +116,37 @@ describe("User", () => {
     expect(resp.headers["content-type"]).toContain("json");
     expect(resp.body).toHaveProperty("username");
   });
+
+  test("must have unique username", async () => {
+    const user = {
+      username: "@holgaKilgorereres",
+      password: "HolgaKilgore322",
+      name: "Holga kilgore",
+    };
+    const resp = await api.post("/api/users").send(user);
+    expect(resp.status).toEqual(409);
+    expect(resp.headers["content-type"]).toContain("json");
+  });
+
+  test("must be created with a name and password", async () => {
+    const user = {
+      password: "HolgaKilgore322",
+      name: "Holga kilgore",
+    };
+    const resp = await api.post("/api/users").send(user);
+    expect(resp.status).toEqual(400);
+    expect(resp.headers["content-type"]).toContain("json");
+  });
+
+  test("can login succesfully with correct credentials", async () => {
+    const user = {
+      username: "@sherlockHolmes",
+      password: "Sherlock",
+      name: "Sherlock Holmes",
+    };
+    await api.post("/api/users").send(user).expect(201);
+    const resp = await api.post("/api/auth/login").send(user);
+    expect(resp.status).toEqual(200);
+    expect(resp.body).toHaveProperty("accessToken");
+  });
 });
