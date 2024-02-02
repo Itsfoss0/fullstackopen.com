@@ -11,6 +11,10 @@ const undefinedRouteHandler = (error, request, response, next) => {
     return response
       .status(400)
       .json({ error: "Missing title or url in the body" });
+  } else if (error.name === "MongoServerError") {
+    return response
+      .status(409)
+      .json({ error: "user with that name already exists" });
   }
   return response.status(404).json({ error: "URL Not found" });
 };
