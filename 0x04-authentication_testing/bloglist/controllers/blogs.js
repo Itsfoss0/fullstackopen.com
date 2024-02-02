@@ -3,12 +3,13 @@
 /* Router for the api/blogs endpoint */
 
 const jwt = require('jsonwebtoken');
+const tokenExtractor = require('../middleware/auth');
 const blogRouter = require('express').Router();
 const Blog = require('../models/blog');
 const User = require('../models/user');
-const getTokenFrom = require('../utils/auth');
 const { JWT_SECRET_KEY } = require('./../config/config');
 
+blogRouter.use(tokenExtractor);
 blogRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({}).populate('user', {
     username: 1,
@@ -36,7 +37,7 @@ blogRouter.delete('/:id', async (request, response) => {
 });
 
 blogRouter.post('/', async (request, response) => {
-  const token = getTokenFrom(request);
+  const token = request.token;
   if (!token) {
     return response
       .status(403)
