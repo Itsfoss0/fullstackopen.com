@@ -96,10 +96,24 @@ describe("API", () => {
     const response = await api.get("/api/blogs");
     expect(response.status).toEqual(200);
     expect(response.headers["content-type"]).toContain("json");
-    expect(response.body[0].title).toEqual(blogs[ blogs.length - 1].title);
+    expect(response.body[0].title).toEqual(blogs[blogs.length - 1].title);
   });
 
   test("handles undefined routes correclty", async () => {
     await api.get("/api/foo").expect(404);
+  });
+});
+
+describe("User", () => {
+  test("can be created correctly", async () => {
+    const user = {
+      username: "@holgaKilgorereres",
+      password: "HolgaKilgore322",
+      name: "Holga kilgore",
+    };
+    const resp = await api.post("/api/users").send(user);
+    expect(resp.status).toEqual(201);
+    expect(resp.headers["content-type"]).toContain("json");
+    expect(resp.body).toHaveProperty("username");
   });
 });
