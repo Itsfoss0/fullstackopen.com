@@ -63,6 +63,13 @@ Content-Type: application/json
     "password": "sholmes"
 }
 
+POST http://localhost:1337/api/auth/login
+Content-Type: application/json
+{
+    "username": "sherlock",
+    "password": "sholmes"
+}
+
 POST http://localhost:1337/api/users
 Content-Type: application/json
 {
@@ -74,6 +81,17 @@ Content-Type: application/json
 POST http://localhost:1337/api/auth/login
 Content-Type: application/json
 {
-    "username": "eagleG",
-    "password": "bravosix"
+    "username": "holgaK",
+    "password": "holga"
+}
+
+
+
+POST http://localhost:1337/api/blogs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTA3MDc2LCJleHAiOjE3MDY5MTA2NzZ9.ZQrxjhGGuX60emGsGcyUbeIYas5ffFYeKssCrOQ8Xz4
+Content-Type: application/json
+{
+    "author": "Justin Timberlake",
+    "url": "https://foo.bar.baz",
+    "title": "Mirrors"
 }
