@@ -3,22 +3,22 @@
 /* error handler middlewares */
 
 const undefinedRouteHandler = (error, request, response, next) => {
-  if (error.name === "CastError") {
+  if (error.name === 'CastError') {
     return response
       .status(400)
-      .json({ error: "Malformed ID, check the ID and try again" });
-  } else if (error.name === "ValidationError") {
+      .json({ error: 'Malformed ID, check the ID and try again' });
+  } else if (error.name === 'ValidationError') {
     return response
       .status(400)
-      .json({ error: "Missing title or url in the body" });
-  } else if (error.name === "MongoServerError") {
+      .json({ error: 'Missing title or url in the body' });
+  } else if (error.name === 'MongoServerError') {
     return response
       .status(409)
-      .json({ error: "user with that name already exists" });
+      .json({ error: 'user with that name already exists' });
   }
-  return response.status(404).json({ error: "URL Not found" });
+  return response.status(404).json({ error: 'URL Not found' });
 };
 
 module.exports = {
-  undefinedRouteHandler,
+  undefinedRouteHandler
 };
