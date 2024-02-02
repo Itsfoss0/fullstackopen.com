@@ -42,7 +42,7 @@ const initDB = async () => {
 
 const clearDB = async () => {
   await Blog.deleteMany({});
-  mongoose.connection.close();
+  await mongoose.connection.close();
 };
 
 module.exports = {
