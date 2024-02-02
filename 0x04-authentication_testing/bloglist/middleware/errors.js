@@ -2,24 +2,40 @@
 
 /* error handler middlewares */
 
-const undefinedRouteHandler = (error, request, response, next) => {
+const errorHandler = (error, request, response, next) => {
   console.log(error);
-  if (error.name === 'CastError') {
-    return response
-      .status(400)
-      .json({ error: 'Malformed ID, check the ID and try again' });
-  } else if (error.name === 'ValidationError') {
-    return response
-      .status(400)
-      .json({ error: 'bad request' });
-  } else if (error.name === 'MongoServerError') {
-    return response
-      .status(409)
-      .json({ error: 'user with that name already exists' });
+
+  let status = 404;
+  let message = 'URL not found';
+
+  switch (error.name) {
+    case 'CastError':
+      status = 400;
+      message = 'Malformed ID, check the ID and try again';
+      break;
+    case 'ValidationError':
+      status = 400;
+      message = 'Bad request';
+      break;
+    case 'MongoServerError':
+      status = 409;
+      message = 'User with that name already exists';
+      break;
+    case 'TokenExpiredError':
+      status = 401;
+      message = 'Token expired';
+      break;
+    case 'TypeError':
+      status = 400;
+      message = 'Missing authorization in the request';
+      break;
   }
-  return response.status(404).json({ error: 'URL Not found' });
+  return response.status(status).json({ error: message });
 };
 
+const undefinedPaths = (reqeust, response) =>
+  response.status(404).json({ error: 'url not found' });
 module.exports = {
-  undefinedRouteHandler
+  errorHandler,
+  undefinedPaths
 };

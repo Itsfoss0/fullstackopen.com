@@ -1,9 +1,11 @@
 #!/usr/bin/env node
+/* extract token from reqeust headers and set them as the request.token */
 
-/* user auth middleware, to restrict unauthorized access to protected endpoints */
-
-const requireAuth = (error, request, response, next) => {
-  if (error) return response.status(400).json({ error: 'bad request' });
+const tokenExtractor = (request, response, next) => {
+  const auth = request.get('authorization').replace('Bearer ', '');
+  request.token = auth;
+  console.log(request.token);
+  return next();
 };
 
-module.exports = requireAuth;
+module.exports = tokenExtractor;
