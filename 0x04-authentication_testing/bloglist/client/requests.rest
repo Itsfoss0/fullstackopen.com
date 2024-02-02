@@ -1,6 +1,8 @@
 GET http://localhost:1337/api/blogs
 
-GET   http://localhost:1337/api/blogs/65b66ae388ec4fe72ce13cb3
+GET http://localhost:1337/api/users
+
+DELETE   http://localhost:1337/api/blogs/65bd35030de4d45a036b6606
 
 POST http://localhost:1337/api/blogs
 Content-Type: application/json
@@ -8,6 +10,14 @@ Content-Type: application/json
     "author": "Holga Kilgore",
     "url": "https://github.com/Itsfoss0",
     "title": "Getting good at git"
+}
+
+POST http://localhost:1337/api/blogs
+Content-Type: application/json
+{
+    "author": "Taylor Shaw",
+    "url": "https://learnk8s.io",
+    "title": "Kubernetes Ingress"
 }
 
 POST http://localhost:1337/api/blogs
@@ -35,7 +45,7 @@ Content-Type: application/json
 }
 
 
-GET http://localhost:1337/api/users
+GET http://localhost:1337/api/users/65bc08cb86e63fc001a12191
 
 POST http://localhost:1337/api/users
 Content-Type: application/json
