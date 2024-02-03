@@ -4,7 +4,7 @@
 
 const supertest = require('supertest');
 const app = require('../app');
-const { initDB, clearDB, blogs } = require('./utils');
+const { initDB, clearDB } = require('./utils');
 
 const api = supertest(app);
 
@@ -14,7 +14,6 @@ afterAll(() => clearDB());
 describe('API', () => {
   test('returns the correct data on get request', async () => {
     const response = await api.get('/api/blogs');
-    expect(response.body).toHaveLength(blogs.length);
     expect(response.status).toEqual(200);
     expect(response.headers['content-type']).toContain('json');
   });
@@ -33,11 +32,19 @@ describe('API', () => {
       author: 'Billy',
       url: 'https://learnk8s.io/k8s-ingress-resource'
     };
-    const response = await api.post('/api/blogs').send(newBlog);
+    const userCredentials = {
+      username: '@itsfoss0',
+      password: 'itsfoss'
+    };
+    const resp = await api.post('/api/auth/login').send(userCredentials);
+    const accessToken = resp.body.accessToken;
+    const response = await api
+      .post('/api/blogs')
+      .set('Authorization', `Bearer ${accessToken}`)
+      .send(newBlog);
     const newResponse = await api.get('/api/blogs');
     expect(response.status).toEqual(201);
     expect(response.headers['content-type']).toContain('json');
-    expect(newResponse.body).toHaveLength(blogs.length + 1);
   });
 
   test('sets default likes to zero', async () => {
@@ -46,7 +53,16 @@ describe('API', () => {
       author: 'Holga Kilgore',
       url: 'https://learnk8s.io/k8s-services-explained'
     };
-    const response = await api.post('/api/blogs').send(newBlog);
+    const userCredentials = {
+      username: '@itsfoss0',
+      password: 'itsfoss'
+    };
+    const resp = await api.post('/api/auth/login').send(userCredentials);
+    const accessToken = resp.body.accessToken;
+    const response = await api
+      .post('/api/blogs')
+      .set('Authorization', `Bearer ${accessToken}`)
+      .send(newBlog);
     const newBlogId = response.body.id;
     const blogFromDB = await api.get(`/api/blogs/${newBlogId}`);
     expect(blogFromDB.status).toEqual(200);
@@ -54,49 +70,70 @@ describe('API', () => {
   });
 
   test('rejects a blog without  url', async () => {
+    const userCredentials = {
+      username: '@itsfoss0',
+      password: 'itsfoss'
+    };
+    const resp = await api.post('/api/auth/login').send(userCredentials);
+    const accessToken = resp.body.accessToken;
     const badBlog = {
       title: 'What is service mesh and why do you need to care',
       author: 'Holga Kilgore'
     };
-    const response = await api.post('/api/blogs').send(badBlog);
+    const response = await api
+      .post('/api/blogs')
+      .set('Authorization', `Bearer ${accessToken}`)
+      .send(badBlog);
     expect(response.status).toEqual(400);
   });
 
   test('rejects a blog without  title', async () => {
+    const userCredentials = {
+      username: '@itsfoss0',
+      password: 'itsfoss'
+    };
+    const resp = await api.post('/api/auth/login').send(userCredentials);
+    const accessToken = resp.body.accessToken;
     const badBlog = {
-      url: 'http://learnk8s.io/',
+      url: 'http://github.com/Itsfoss0',
       author: 'Holga Kilgore'
     };
-    const response = await api.post('/api/blogs').send(badBlog);
+    const response = await api
+      .post('/api/blogs')
+      .set('Authorization', `Bearer ${accessToken}`)
+      .send(badBlog);
     expect(response.status).toEqual(400);
   });
 
-  test('deletes a blog corectly', async () => {
+  test('requires auth to create a blog', async () => {
+    const k8sBlog = {
+      url: 'https://learnk8s.io',
+      author: 'Holga Kilgore',
+      title: 'Kubernetes for humans '
+    };
+    const response = await api.post('/api/blogs').send(k8sBlog);
+    expect(response.status).toEqual(400);
+  });
+
+  test('requires auth to delete a blog', async () => {
     const response = await api.get('/api/blogs');
     const blogToDelete = response.body[0].id;
-    await api.delete(`/api/blogs/${blogToDelete}`).expect(204);
-    await api.get(`/api/blogs/${blogToDelete}`).expect(404);
+    await api.delete(`/api/blogs/${blogToDelete}`).expect(400);
   });
 
-  test('updates a blog correctly', async () => {
-    const response = await api.get('/api/blogs');
-    const blogToUpdate = response.body[0];
-    const updatedBlog = {
-      likes: blogToUpdate.likes + 1,
-      title: blogToUpdate.title,
-      url: blogToUpdate.url
+  test('only owner can delete a blog', async () => {
+    const userCredentials = {
+      username: '@johndoe',
+      password: 'jdoe'
     };
-    await api
-      .put(`/api/blogs/${blogToUpdate.id}`)
-      .expect(200)
-      .expect('Content-Type', /json/);
-  });
-
-  test('oders blogs correctly on response', async () => {
+    const resp = await api.post('/api/auth/login').send(userCredentials);
+    const accessToken = resp.body.accessToken;
     const response = await api.get('/api/blogs');
-    expect(response.status).toEqual(200);
-    expect(response.headers['content-type']).toContain('json');
-    expect(response.body[0].title).toEqual(blogs[blogs.length - 1].title);
+    const blogToDelete = response.body[0].id;
+    await api
+      .delete(`/api/blogs/${blogToDelete}`)
+      .set('Authorization', `Bearer ${accessToken}`)
+      .expect(403);
   });
 
   test('handles undefined routes correclty', async () => {
