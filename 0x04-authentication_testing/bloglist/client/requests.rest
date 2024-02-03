@@ -111,22 +111,32 @@ POST http://localhost:1337/api/blogs
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTEyMjI4LCJleHAiOjE3MDY5MTU4Mjh9.bZvmFNsferKLyCJldDaUJSXdIy-wYBxSVSB4N8divlI
 Content-Type: application/json
 {
-    "author": "Damon Salvatore",
-    "url": "https://foo.bar.baz",
-    "title": "The ampire diaries"
+    "author": "Brett Sam",
+    "url": "http://wecareaboutsre.tech",
+    "title": "Introduction to service mesh - LinkerD"
 }
 
 POST http://localhost:1337/api/blogs
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTQ1NTUzLCJleHAiOjE3MDY5NDkxNTN9.HwWkfdueQuVceT1zlPQSemcsVvlJxs7zjwqhGXXxt4Q
 Content-Type: application/json
 {
-    "author": "Jossie Joy",
-    "url": "https://thesrehumans.tech/",
-    "title": "SLAs, SLO and SLI's what'w with the buzzwords"
+    "author": "Brett Sam",
+    "url": "http://wecareaboutsre.tech",
+    "title": "Introduction to service mesh - LinkerD"
 }
 
-DELETE  http://localhost:1337/api/blogs/65bdec76d1b561f54b198b78
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNoZXJsb2NrIiwibmFtZSI6IlNoZXJsb2NrIEhvbG1lcyIsInVzZXJJZCI6IjY1YmQ1NTI2OTZhZmQ5NDA2YTgzZjYzMyIsImlhdCI6MTcwNjk0NTcyMywiZXhwIjoxNzA2OTQ5MzIzfQ.-3bWzq87Zjl-Mfs2Ij_XNLCU2KA6RiAguevbwfu8H8c
 
-DELETE  http://localhost:1337/api/blogs/65bdec76d1b561f54b198b78
+GET  http://localhost:1337/api/blogs/65bd3c517e77f490e50c9e4e
+
+PUT   http://localhost:1337/api/blogs/65bd3c517e77f490e50c9e4e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTUxMjc0LCJleHAiOjE3MDY5NTQ4NzR9.RXEMGUpdNIt_l3qEmsh33zoMTbFEiPaD7FuxYV4fLlM
+Content-Type: application/json
+{
+    "title": "You don't need a sevice mesh (yet)",
+    "author": "Some random guy",
+    "likes": 3,
+    "url": "https://learnk8s.io"
+}
+
+DELETE  http://localhost:1337/api/blogs/65bdf736cb3884d7258a1305
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTQ1NTUzLCJleHAiOjE3MDY5NDkxNTN9.HwWkfdueQuVceT1zlPQSemcsVvlJxs7zjwqhGXXxt4Q
