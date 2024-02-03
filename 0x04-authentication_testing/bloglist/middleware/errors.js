@@ -3,8 +3,6 @@
 /* error handler middlewares */
 
 const errorHandler = (error, request, response, next) => {
-  console.log(error);
-
   let status = 404;
   let message = 'URL not found';
 

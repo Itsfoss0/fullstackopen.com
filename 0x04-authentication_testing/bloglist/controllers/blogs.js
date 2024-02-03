@@ -51,7 +51,6 @@ blogRouter.delete('/:id', async (request, response) => {
 blogRouter.post('/', async (request, response) => {
   const token = request.token;
   const requser = request.user;
-  console.log(`${requser} is the user`);
   if (!token) {
     return response
       .status(403)
