@@ -1,4 +1,4 @@
-GET http://localhost:1337/api/blogs
+GET http://localhost:1337/api/blogssdfdsfsdfsd
 
 GET http://localhost:1337/api/users
 
@@ -45,7 +45,8 @@ Content-Type: application/json
 }
 
 
-GET http://localhost:1337/api/users/65bc08cb86e63fc001a12191
+GET http://localhost:1337/api/users/
+GET http://localhost:1337/api/blogs/
 
 POST http://localhost:1337/api/users
 Content-Type: application/json
@@ -88,10 +89,44 @@ Content-Type: application/json
 
 
 POST http://localhost:1337/api/blogs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTA3MDc2LCJleHAiOjE3MDY5MTA2NzZ9.ZQrxjhGGuX60emGsGcyUbeIYas5ffFYeKssCrOQ8Xz4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTA4Mzg3LCJleHAiOjE3MDY5MTE5ODd9.eZ1t002jykChqftqR_vDiXVFKQI47gWZgqHyaJMPFQo
 Content-Type: application/json
 {
-    "author": "Justin Timberlake",
+    "author": "Coconut Man",
     "url": "https://foo.bar.baz",
     "title": "Mirrors"
 }
+
+
+POST http://localhost:1337/api/blogs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTA4Mzg3LCJleHAiOjE3MDY5MTE5ODd9.eZ1t002jykChqftqR_vDiXVFKQI47gWZgqHyaJMPFQo
+Content-Type: application/json
+{
+    "author": "Ross Copperman",
+    "url": "https://foo.bar.baz",
+    "title": "Hunger"
+}
+
+POST http://localhost:1337/api/blogs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTEyMjI4LCJleHAiOjE3MDY5MTU4Mjh9.bZvmFNsferKLyCJldDaUJSXdIy-wYBxSVSB4N8divlI
+Content-Type: application/json
+{
+    "author": "Damon Salvatore",
+    "url": "https://foo.bar.baz",
+    "title": "The ampire diaries"
+}
+
+POST http://localhost:1337/api/blogs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTQ1NTUzLCJleHAiOjE3MDY5NDkxNTN9.HwWkfdueQuVceT1zlPQSemcsVvlJxs7zjwqhGXXxt4Q
+Content-Type: application/json
+{
+    "author": "Jossie Joy",
+    "url": "https://thesrehumans.tech/",
+    "title": "SLAs, SLO and SLI's what'w with the buzzwords"
+}
+
+DELETE  http://localhost:1337/api/blogs/65bdec76d1b561f54b198b78
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNoZXJsb2NrIiwibmFtZSI6IlNoZXJsb2NrIEhvbG1lcyIsInVzZXJJZCI6IjY1YmQ1NTI2OTZhZmQ5NDA2YTgzZjYzMyIsImlhdCI6MTcwNjk0NTcyMywiZXhwIjoxNzA2OTQ5MzIzfQ.-3bWzq87Zjl-Mfs2Ij_XNLCU2KA6RiAguevbwfu8H8c
+
+DELETE  http://localhost:1337/api/blogs/65bdec76d1b561f54b198b78
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvbGdhSyIsIm5hbWUiOiJIb2xnYSBLaWxnb3JlIiwidXNlcklkIjoiNjViZDM5NWYwZDhmNjZjODJmMzA2NmRlIiwiaWF0IjoxNzA2OTQ1NTUzLCJleHAiOjE3MDY5NDkxNTN9.HwWkfdueQuVceT1zlPQSemcsVvlJxs7zjwqhGXXxt4Q
