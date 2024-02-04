@@ -13,3 +13,6 @@ Deep Dive into modern web development with React, Redux, GraphQL, MongoDB and Ty
 [Part 3](./0x03-backend_node/): Backend engineering with the nodejs runtime
 
 [Part 4](./0x04-authentication_testing/): User authentication and testing
+
+[Part 5](./0x05-frontend_react/): Frontend user auth
+
