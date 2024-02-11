@@ -15,7 +15,7 @@ const NewBlog = () => {
     const data = new FormData(event.target);
     const payload = Object.fromEntries(data);
     const resp = await blogService.createNew(user.accessToken, payload);
-    if (resp.status === 200) {
+    if (resp.status === 201) {
       setMessage('Added New blog');
       clearMessage();
       return
