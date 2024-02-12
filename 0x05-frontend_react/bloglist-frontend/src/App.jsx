@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
-import Blog from './components/Blog';
-import LoginForm from './components/LoginForm';
-import NewBlog from './components/NewBlog';
-import User from './components/User';
-import blogService from './services/blogs';
+import { useState, useEffect } from "react";
+import Blog from "./components/Blog";
+import LoginForm from "./components/LoginForm";
+import NewBlog from "./components/NewBlog";
+import User from "./components/User";
+import blogService from "./services/blogs";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [user, setUser] = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
 
   const fetchBlogs = async () => {
     const data = await blogService.getAll();
@@ -15,9 +16,13 @@ const App = () => {
   };
 
   const getUser = () => {
-    const user = JSON.parse(window.localStorage.getItem('user'));
+    const user = JSON.parse(window.localStorage.getItem("user"));
     if (user) setUser(user);
   };
+
+  const toggleLogin = () =>{
+    setShowLogin(!showLogin)
+  }
 
   useEffect(() => {
     fetchBlogs();
@@ -27,22 +32,19 @@ const App = () => {
     getUser();
   }, []);
 
+
   return (
     <>
-      {!user
-        ? (
-          <LoginForm />
-          )
-        : (
-          <div>
-            <User user={user} />
-            <h2>blogs</h2>
-            {blogs.map((blog) => (
-              <Blog key={blog.id} blog={blog} />
-            ))}
-            <NewBlog />
-          </div>
-          )}
+      <button onClick={() => toggleLogin()}>Login</button>
+      {showLogin && <LoginForm/>}
+      <div>
+        { user && <User user={user} />}
+        <h2>blogs</h2>
+        {blogs.map((blog) => (
+          <Blog key={blog.id} blog={blog} />
+        ))}
+        <NewBlog />
+      </div>
     </>
   );
 };
