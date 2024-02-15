@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import blogs from '../services/blogs';
 
 const Blog = ({ blog }) => {
   const blogStyle = {
@@ -9,9 +10,19 @@ const Blog = ({ blog }) => {
     marginBottom: 5
   };
   const [expanded, setExpanded] = useState(false);
+  const [liked, setLiked] = useState(false);
 
   const toggleExpand = () => {
     setExpanded(!expanded);
+  };
+
+  const token = JSON.parse(localStorage.getItem('user')).accessToken;
+  const likeBlog = async () => {
+    const payload = { ...blog, likes: blog.likes + 1 };
+    const resp = await blogs.modifyBlog(blog.id, payload, token);
+    if (resp.status === 200) {
+      setLiked(true);
+    }
   };
 
   const buttonLabel = expanded ? 'Hide' : 'View';
@@ -23,7 +34,10 @@ const Blog = ({ blog }) => {
       {expanded && (
         <>
           <p><a href={blog.url}>{blog.url}</a></p>
-          <div>Likes: {blog.likes}</div>
+          <div>
+            Likes: {blog.likes}
+            <button onClick={likeBlog} disabled={liked}>Like</button>
+          </div>
           <div>Author: {blog.author}</div>
         </>
       )}

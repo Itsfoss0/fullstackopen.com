@@ -17,4 +17,14 @@ const createNew = async (authToken, payload) => {
   return response;
 };
 
-export default { getAll, createNew };
+const modifyBlog = async (id, payload, authToken) => {
+  const config = {
+    headers: {
+      Authorization: authToken
+    }
+  };
+  const response = await axios.put(`${baseUrl}/${id}`, payload, config);
+  return response;
+};
+
+export default { getAll, createNew, modifyBlog };

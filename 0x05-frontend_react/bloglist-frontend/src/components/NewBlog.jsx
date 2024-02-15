@@ -37,7 +37,6 @@ const NewBlog = forwardRef((props, ref) => {
         <div>Link: <input type='text' name='url' /></div>
         <button type='submit'>Create</button>
       </form>
-      {console.log(ref)}
     </>
   );
 });
