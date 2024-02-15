@@ -27,4 +27,14 @@ const modifyBlog = async (id, payload, authToken) => {
   return response;
 };
 
-export default { getAll, createNew, modifyBlog };
+const deleteBlog = async (id, authToken) => {
+  const config = {
+    headers: {
+      Authorization: authToken
+    }
+  };
+  const response = await axios.delete(`${baseUrl}/${id}`, config);
+  return response;
+};
+
+export default { getAll, createNew, modifyBlog, deleteBlog };

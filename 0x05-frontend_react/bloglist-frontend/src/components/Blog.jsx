@@ -17,11 +17,22 @@ const Blog = ({ blog }) => {
   };
 
   const token = JSON.parse(localStorage.getItem('user')).accessToken;
+
   const likeBlog = async () => {
     const payload = { ...blog, likes: blog.likes + 1 };
     const resp = await blogs.modifyBlog(blog.id, payload, token);
     if (resp.status === 200) {
       setLiked(true);
+    }
+  };
+
+  const deleteBlog = async () => {
+    const confirm = window.confirm(`Confirm you want to delete ${blog.title}`);
+    if (confirm) {
+      const resp = await blogs.deleteBlog(blog.id, token);
+      if (resp.status === 204) {
+        console.log(`Deleted ${blog.title}`);
+      }
     }
   };
 
@@ -33,12 +44,17 @@ const Blog = ({ blog }) => {
       <button onClick={toggleExpand}>{buttonLabel}</button>
       {expanded && (
         <>
-          <p><a href={blog.url}>{blog.url}</a></p>
+          <p>
+            <a href={blog.url}>{blog.url}</a>
+          </p>
           <div>
             Likes: {blog.likes}
-            <button onClick={likeBlog} disabled={liked}>Like</button>
+            <button onClick={likeBlog} disabled={liked}>
+              Like
+            </button>
           </div>
           <div>Author: {blog.author}</div>
+          <button onClick={deleteBlog}>🗑 Delete</button>
         </>
       )}
     </div>
