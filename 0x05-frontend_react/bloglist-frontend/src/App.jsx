@@ -14,6 +14,7 @@ const App = () => {
   const formRef = useRef(null);
   const fetchBlogs = async () => {
     const data = await blogService.getAll();
+    data.sort((a, b) => b.likes - a.likes);
     setBlogs(data);
   };
 
