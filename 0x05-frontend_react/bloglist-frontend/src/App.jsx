@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Blog from './components/Blog';
 import LoginForm from './components/LoginForm';
 import NewBlog from './components/NewBlog';
@@ -11,6 +11,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
 
+  const formRef = useRef(null);
   const fetchBlogs = async () => {
     const data = await blogService.getAll();
     setBlogs(data);
@@ -43,8 +44,8 @@ const App = () => {
         {blogs.map((blog) => (
           <Blog key={blog.id} blog={blog} />
         ))}
-        <Togglable label='New'>
-          <NewBlog />
+        <Togglable label='New' ref={formRef}>
+          <NewBlog ref={formRef} />
         </Togglable>
       </div>
     </>

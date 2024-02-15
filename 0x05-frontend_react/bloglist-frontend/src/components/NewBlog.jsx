@@ -1,8 +1,8 @@
 
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import blogService from '../services/blogs';
 
-const NewBlog = () => {
+const NewBlog = forwardRef((props, ref) => {
   const [message, setMessage] = useState(null);
   const clearMessage = () => {
     setTimeout(() => {
@@ -15,13 +15,17 @@ const NewBlog = () => {
     const data = new FormData(event.target);
     const payload = Object.fromEntries(data);
     const resp = await blogService.createNew(user.accessToken, payload);
-    if (resp.status === 201) {
-      setMessage('Added New blog');
+    try {
+      if (resp.status === 201) {
+        setMessage('Added New blog');
+        clearMessage();
+      }
+    } catch (error) {
+      setMessage('Could not add blog');
       clearMessage();
-      return;
+    } finally {
+      ref.current.close();
     }
-    setMessage('Could not add blog');
-    clearMessage();
   };
 
   return (
@@ -33,8 +37,9 @@ const NewBlog = () => {
         <div>Link: <input type='text' name='url' /></div>
         <button type='submit'>Create</button>
       </form>
+      {console.log(ref)}
     </>
   );
-};
+});
 
 export default NewBlog;
