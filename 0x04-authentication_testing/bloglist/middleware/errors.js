@@ -5,7 +5,6 @@
 const errorHandler = (error, request, response, next) => {
   let status = 404;
   let message = 'URL not found';
-
   switch (error.name) {
     case 'CastError':
       status = 400;
