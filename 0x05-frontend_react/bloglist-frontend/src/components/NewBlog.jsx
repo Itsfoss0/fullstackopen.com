@@ -18,10 +18,10 @@ const NewBlog = () => {
     if (resp.status === 201) {
       setMessage('Added New blog');
       clearMessage();
-      return
+      return;
     }
-    setMessage('Could not add blog')
-    clearMessage()
+    setMessage('Could not add blog');
+    clearMessage();
   };
 
   return (
