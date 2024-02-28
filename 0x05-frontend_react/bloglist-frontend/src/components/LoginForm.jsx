@@ -17,7 +17,7 @@ const LoginForm = () => {
       if (resp.status === 200) {
         const user = JSON.stringify(resp.data);
         setMessage('Logged In successfully');
-        window.localStorage.setItem('user', user);
+        localStorage.setItem('user', user);
         clearMessage();
       }
     } catch (error) {
@@ -31,8 +31,12 @@ const LoginForm = () => {
       <h2>Login to the application</h2>
       {message && <div>{message}</div>}
       <form onSubmit={submitForm} method='post'>
-        <div>Username: <input type='text' name='username' /></div>
-        <div>Password: <input type='password' name='password' /></div>
+        <div>
+          Username: <input type='text' name='username' />
+        </div>
+        <div>
+          Password: <input type='password' name='password' />
+        </div>
         <button type='submit'> Login</button>
       </form>
     </div>
