@@ -1,24 +1,24 @@
-import React from "react";
-import UserEvent, { userEvent } from "@testing-library/user-event";
-import { render, screen, waitFor } from "@testing-library/react";
-import "jest-localstorage-mock";
-import Blog from "../../components/Blog";
-import blogs from "../../services/blogs";
+import React from 'react';
+import UserEvent, { userEvent } from '@testing-library/user-event';
+import { render, screen, waitFor } from '@testing-library/react';
+import 'jest-localstorage-mock';
+import Blog from '../../components/Blog';
+import blogs from '../../services/blogs';
 
-describe("<Blog/> component", () => {
+describe('<Blog/> component', () => {
   beforeEach(() => {
-    localStorage.setItem("user", JSON.stringify({ accessToken: "test_token" }));
+    localStorage.setItem('user', JSON.stringify({ accessToken: 'test_token' }));
     // spy on blog services
-    jest.spyOn(blogs, "modifyBlog");
-    jest.spyOn(blogs, "deleteBlog");
+    jest.spyOn(blogs, 'modifyBlog');
+    jest.spyOn(blogs, 'deleteBlog');
 
     // create a dummy blog object
     const blog = {
       id: 1,
-      title: "Docker",
-      author: "John Doe",
-      url: "https://test.com",
-      likes: 0,
+      title: 'Docker',
+      author: 'John Doe',
+      url: 'https://test.com',
+      likes: 0
     };
 
     render(<Blog blog={blog} />);
@@ -29,7 +29,7 @@ describe("<Blog/> component", () => {
     jest.restoreAllMocks();
   });
 
-  test("renders the blog title by default", async () => {
+  test('renders the blog title by default', async () => {
     const content = await screen.findByText(/docker/i);
 
     expect(content).toBeDefined();
@@ -40,7 +40,7 @@ describe("<Blog/> component", () => {
     const viewBtn = await screen.findByText(/view/i);
     user.click(viewBtn);
     const hideBtn = await screen.findByText(/hide/i);
-    const urlDiv = await screen.findByText("https://test.com");
+    const urlDiv = await screen.findByText('https://test.com');
 
     expect(viewBtn).toBeDefined();
     expect(hideBtn).toBeDefined();
@@ -57,7 +57,7 @@ describe("<Blog/> component", () => {
       expect(screen.findByText(/view/)).toBeDefined();
     });
     await waitFor(() => {
-      expect(screen.queryByText("https://test.com")).toBeNull();
+      expect(screen.queryByText('https://test.com')).toBeNull();
     });
   });
 
