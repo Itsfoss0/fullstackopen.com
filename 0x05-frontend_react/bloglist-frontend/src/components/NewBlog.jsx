@@ -50,7 +50,7 @@ const NewBlog = forwardRef((props, ref) => {
 });
 
 NewBlog.propTypes = {
-  props: PropTypes.object.isRequired,
+  props: PropTypes.object,
   ref: PropTypes.object
 };
 export default NewBlog;
