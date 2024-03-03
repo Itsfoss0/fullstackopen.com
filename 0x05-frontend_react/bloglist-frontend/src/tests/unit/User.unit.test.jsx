@@ -1,15 +1,16 @@
-import { render, screen } from '@testing-library/react';
-import User from '../../components/User';
+import { render, screen } from "@testing-library/react";
+import User from "../../components/User";
 
-jest.mock('../../services/auth', () => ({
-  logout: jest.fn()
+jest.mock("../../services/auth", () => ({
+  logout: jest.fn(),
 }));
 
-describe('<User/> Test case', () => {
+describe("<User/> component", () => {
   beforeEach(() => {
+    const submitBlog = jest.fn();
     const user = {
-      username: 'itsfoss0',
-      userId: 'udswh782ds90lmc'
+      username: "itsfoss0",
+      userId: "udswh782ds90lmc",
     };
     render(<User user={user} />);
   });
@@ -19,7 +20,7 @@ describe('<User/> Test case', () => {
     jest.restoreAllMocks();
   });
 
-  it('renders the username to screen', () => {
+  it("renders the username to screen", () => {
     const user = screen.getByText(/itsfoss0/i);
     expect(user).toBeDefined();
   });
