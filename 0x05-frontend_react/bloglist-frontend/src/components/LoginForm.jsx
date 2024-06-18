@@ -32,12 +32,12 @@ const LoginForm = () => {
       {message && <div>{message}</div>}
       <form onSubmit={submitForm} method='post'>
         <div>
-          Username: <input type='text' name='username' />
+          Username: <input type='text' id='username' name='username' />
         </div>
         <div>
-          Password: <input type='password' name='password' />
+          Password: <input type='password' id='password' name='password' />
         </div>
-        <button type='submit'> Login</button>
+        <button type='submit' id='submit'> Login</button>
       </form>
     </div>
   );

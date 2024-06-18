@@ -29,9 +29,9 @@ const NewBlog = forwardRef((props, innerRef) => {
       if (resp.status === 201) {
         setMessage('Added New blog');
         clearMessage();
-        innerRef.current.close();
       }
     } catch (error) {
+      console.log(error)
       setMessage('Could not add blog');
       clearMessage();
     }
@@ -43,15 +43,15 @@ const NewBlog = forwardRef((props, innerRef) => {
       <h2>Add another blog</h2>
       <form onSubmit={submitBlog} method='POST'>
         <div>
-          Title: <input type='text' name='title' />
+          Title: <input type='text' id='title' name='title' />
         </div>
         <div>
-          Author: <input type='text' name='author' />
+          Author: <input type='text' id='author' name='author' />
         </div>
         <div>
-          Link: <input type='text' name='url' />
+          Link: <input type='text' id='link' name='url' />
         </div>
-        <button type='submit'>Create</button>
+        <button  id='new-blog' type='submit'>Create</button>
       </form>
     </>
   );
