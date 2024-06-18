@@ -29,14 +29,13 @@ app.use(morgan("tiny"));
 app.use("/api/blogs", blogRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/testing/", testingRouter);
-
-
-app.use(undefinedPaths);
-app.use(errorHandler);
 
 if (NODE_ENV === "test") {
   app.use("/api/testing/", testingRouter);
 }
+
+
+app.use(undefinedPaths);
+app.use(errorHandler);
 
 module.exports = app;
