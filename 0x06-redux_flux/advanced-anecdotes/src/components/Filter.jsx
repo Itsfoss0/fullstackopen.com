@@ -10,6 +10,7 @@ const Filter = () => {
 
   return (
     <>
+      Filter: 
       <input
         type='text'
         name='filter'
