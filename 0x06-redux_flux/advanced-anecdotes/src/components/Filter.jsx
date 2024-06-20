@@ -1,5 +1,5 @@
-import { filterChange } from '../reducers/filterReducer';
-import { useDispatch } from 'react-redux';
+import { filterChange } from "../reducers/filterReducer";
+import { useDispatch } from "react-redux";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -8,17 +8,20 @@ const Filter = () => {
     dispatch(filterChange(what));
   };
 
+  const style = {
+    marginBottom: 10,
+  };
   return (
-    <>
-      Filter: 
+    <div style={style}>
+      Filter:
       <input
-        type='text'
-        name='filter'
+        type="text"
+        name="filter"
         onChange={(event) => {
           filterAnecdotes(event.target.value);
         }}
       />
-    </>
+    </div>
   );
 };
 
