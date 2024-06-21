@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { useSelector, useDispatch } from "react-redux";
 import { upVoteAnecdote } from "../reducers/anecdoteReducer";
+import { setNotification } from "../reducers/notificationReducer";
 
 const Anecdote = ({ info, upVote }) => {
   return (
@@ -37,7 +38,13 @@ const AnecdoteList = () => {
           <Anecdote
             key={anec.id}
             info={anec}
-            upVote={() => dispatch(upVoteAnecdote(anec))}
+            upVote={() => {
+              dispatch(upVoteAnecdote(anec));
+              dispatch(setNotification(`Voted ${anec.content}`));
+              setTimeout(() => {
+                dispatch(setNotification(""));
+              }, 3000);
+            }}
           />
         ))}
       </ul>

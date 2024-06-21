@@ -1,13 +1,22 @@
+/* eslint-disable  */
+
+import { useSelector } from "react-redux";
+
 const Notification = () => {
   const style = {
-    border: 'solid',
+    border: "solid",
     padding: 10,
-    borderWidth: 1
+    borderWidth: 1,
+    marginBottom: 10
   };
-  return (
-    <div style={style}>
-      render here notification...
-    </div>
+
+  const notification = useSelector((state) => state.notifications);
+  const showNotification = notification !== "";
+
+  return showNotification ? (
+    <div style={style}>{notification}</div>
+  ) : (
+    <div></div>
   );
 };
 
