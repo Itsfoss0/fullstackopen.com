@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import { useSelector, useDispatch } from "react-redux";
 import { upVoteAnecdote } from "../reducers/anecdoteReducer";
 
@@ -15,16 +14,20 @@ const Anecdote = ({ info, upVote }) => {
 
 const AnecdoteList = () => {
   const anecdotesArray = useSelector(({ filterText, anecdotes }) => {
-    if (filterText === "") {
-      return anecdotes;
+    let filteredAnecdotes = anecdotes;
+    if (filterText !== "") {
+      filteredAnecdotes = anecdotes.filter((anc) =>
+        anc.content.toLowerCase().includes(filterText.toLowerCase())
+      );
     }
-    // return an array of those that match the filter  criteria
-    const matches = anecdotes.filter((anc) =>
-      anc.content.toLowerCase().includes(filterText.toLowerCase())
+
+    const sortedAnecdotes = [...filteredAnecdotes].sort(
+      (a, b) => b.votes - a.votes
     );
-    return matches;
+
+    return sortedAnecdotes;
   });
-  anecdotesArray.sort((a, b) => b.votes - a.votes);
+
   const dispatch = useDispatch();
 
   return (

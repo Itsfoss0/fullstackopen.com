@@ -1,5 +1,7 @@
 /* eslint-disable no-case-declarations */
 
+import { createSlice } from '@reduxjs/toolkit';
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -21,13 +23,21 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject);
 
-const anecdoteReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'NEW':
-      return state.concat(action.payload);
-
-    case 'VOTE':
-      const anecdoteToVote = state.find((a) => a.id === action.payload.id);
+const anecdoteSlice = createSlice({
+  name: 'anecdotes',
+  initialState,
+  reducers: {
+    newAnecdote (state, action) {
+      const content = action.payload;
+      state.push({
+        id: getId(),
+        content,
+        votes: 0
+      });
+    },
+    upVoteAnecdote (state, action) {
+      const id = action.payload.id;
+      const anecdoteToVote = state.find((a) => a.id === id);
       const updatedAnecdote = {
         ...anecdoteToVote,
         votes: anecdoteToVote.votes + 1
@@ -35,28 +45,9 @@ const anecdoteReducer = (state = initialState, action) => {
       return state.map((a) =>
         a.id === action.payload.id ? updatedAnecdote : a
       );
-
-    default:
-      return state;
-  }
-};
-
-export const newAnecdote = (anecdote) => {
-  return {
-    type: 'NEW',
-    payload: {
-      content: anecdote,
-      votes: 0,
-      id: getId()
     }
-  };
-};
+  }
+});
 
-export const upVoteAnecdote = (anecdote) => {
-  return {
-    type: 'VOTE',
-    payload: anecdote
-  };
-};
-
-export default anecdoteReducer;
+export const { newAnecdote, upVoteAnecdote } = anecdoteSlice.actions;
+export default anecdoteSlice.reducer;
