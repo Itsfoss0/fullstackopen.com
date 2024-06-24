@@ -16,4 +16,4 @@ Deep Dive into modern web development with React, Redux, GraphQL, MongoDB and Ty
 
 [Part 5](./0x05-frontend_react/): Frontend user auth and E2E testing
 
-[Part 6]:(0x06-redux_flux/): Advanced state management with redux and redux-toolkit
+[Part 6](0x06-redux_flux/): Advanced state management with redux and redux-toolkit
