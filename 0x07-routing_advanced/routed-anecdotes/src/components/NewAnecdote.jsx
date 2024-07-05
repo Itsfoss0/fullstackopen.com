@@ -2,8 +2,12 @@ import { postAnecdote } from '../reducers/anecdoteReducer';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { notify, clearNotification } from '../reducers/notifcationReducer';
+import { useField } from '../hooks';
 
 const CreateNew = () => {
+  const content = useField({ type: 'text', name: 'content' });
+  const author = useField({ type: 'text', name: 'author' });
+  const info = useField({ type: 'text', name: 'info' });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const genId = () => {
@@ -27,23 +31,31 @@ const CreateNew = () => {
     setTimeout(() => dispatch(clearNotification()), 5000);
   };
 
+  const clearForm = (event) => {
+    event.preventDefault();
+    content.reset();
+    author.reset();
+    info.reset();
+  };
+
   return (
     <div>
       <h2>Create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
           Content
-          <input name='content' />
+          <input {...content} />
         </div>
         <div>
           Author
-          <input name='author' />
+          <input {...author} />
         </div>
         <div>
           Url for more info
-          <input name='info' />
+          <input {...info} />
         </div>
-        <button>Create</button>
+        <input type='submit' value='Create' />
+        <input type='reset' value='Clear' onClick={clearForm} />
       </form>
     </div>
   );
