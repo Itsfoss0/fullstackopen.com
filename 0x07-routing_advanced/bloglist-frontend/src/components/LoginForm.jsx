@@ -1,13 +1,10 @@
 import { useState } from 'react';
+import { notify } from '../reducers/notitification.reducer';
 import { loginUser } from '../services/auth';
-
+import { useDispatch, useSelector } from 'react-redux';
 const LoginForm = () => {
-  const [message, setMessage] = useState(null);
-  const clearMessage = () => {
-    setTimeout(() => {
-      setMessage(null);
-    }, 3000);
-  };
+  const dispatch = useDispatch();
+  const message = useSelector((state) => state.notification);
   const submitForm = async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -16,13 +13,11 @@ const LoginForm = () => {
       const resp = await loginUser(payload);
       if (resp.status === 200) {
         const user = JSON.stringify(resp.data);
-        setMessage('Logged In successfully');
+        dispatch(notify('Logged In successfully', 2000));
         localStorage.setItem('user', user);
-        clearMessage();
       }
     } catch (error) {
-      setMessage('Invalid username or password');
-      clearMessage();
+      dispatch(notify('Invalid username or password', 2000));
     }
   };
 
@@ -37,7 +32,10 @@ const LoginForm = () => {
         <div>
           Password: <input type='password' id='password' name='password' />
         </div>
-        <button type='submit' id='submit'> Login</button>
+        <button type='submit' id='submit'>
+          {' '}
+          Login
+        </button>
       </form>
     </div>
   );

@@ -1,16 +1,16 @@
 import { forwardRef, useImperativeHandle } from 'react';
-import blogService from '../services/blogs';
 import PropTypes from 'prop-types';
 import { notify } from '../reducers/notitification.reducer';
 import { useSelector, useDispatch } from 'react-redux';
+import { addBlog } from '../reducers/blogs.reducer';
 
 const NewBlog = forwardRef((props, innerRef) => {
   const dispatch = useDispatch();
   const message = useSelector((state) => state.notification);
-  console.log(message);
   useImperativeHandle(innerRef, () => ({
     closeForm () {
       if (innerRef && innerRef.current) {
+        formRef.current.style.display = 'none';
         innerRef.current.close();
       }
     }
@@ -22,8 +22,9 @@ const NewBlog = forwardRef((props, innerRef) => {
     const data = new FormData(event.target);
     const payload = Object.fromEntries(data);
     try {
-      const resp = await blogService.createNew(user.accessToken, payload);
+      const resp = await dispatch(addBlog(payload, user.accessToken));
       if (resp.status === 201) {
+        event.target.reset();
         dispatch(notify('Added new Blog', 2000));
       }
     } catch (error) {

@@ -1,25 +1,21 @@
+import { createSelector } from '@reduxjs/toolkit';
 import { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Blog from './components/Blog';
 import LoginForm from './components/LoginForm';
 import NewBlog from './components/NewBlog';
 import Togglable from './components/Togglable';
 import User from './components/User';
-import blogService from './services/blogs';
+import { fetchBlogsFromAPI } from './reducers/blogs.reducer';
+import { selectSortedBlogs } from './selectors/blogs.selector';
 
 const App = () => {
-  const [blogs, setBlogs] = useState([]);
+  const dispatch = useDispatch();
+  const blogs = useSelector(selectSortedBlogs);
   const [user, setUser] = useState(null);
   const [showLogin, setShowLogin] = useState(true);
 
   const formRef = useRef(null);
-
-  const fetchBlogs = async () => {
-    const data = await blogService.getAll();
-    if (data.length > 0) {
-      data.sort((a, b) => b.likes - a.likes);
-      setBlogs(data);
-    }
-  };
 
   const getUser = () => {
     const user = JSON.parse(window.localStorage.getItem('user'));
@@ -36,11 +32,10 @@ const App = () => {
   };
 
   useEffect(() => {
-    getUser();
+    dispatch(fetchBlogsFromAPI());
   }, []);
-
   useEffect(() => {
-    fetchBlogs();
+    getUser();
   }, []);
 
   return (

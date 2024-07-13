@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import blogs from '../services/blogs';
-
+import { removeBlog } from '../reducers/blogs.reducer';
+import { useDispatch } from 'react-redux';
 const Blog = ({ blog }) => {
+  const dispatch = useDispatch();
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -30,7 +32,7 @@ const Blog = ({ blog }) => {
   const deleteBlog = async () => {
     const confirm = window.confirm(`Confirm you want to delete ${blog.title}`);
     if (confirm) {
-      const resp = await blogs.deleteBlog(blog.id, token);
+      const resp = await dispatch(removeBlog(blog.id, token));
       if (resp.status === 204) {
         console.log(`Deleted ${blog.title}`);
       }
