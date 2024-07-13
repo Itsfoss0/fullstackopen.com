@@ -20,4 +20,4 @@ Deep Dive into modern web development with React, Redux, GraphQL, MongoDB and Ty
 
 [Part 7](0x07-routing_advanced): Routing and class components
 
-
+[Part 8](0x08-graphql): GraphQL
