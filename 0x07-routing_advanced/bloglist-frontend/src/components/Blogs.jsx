@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import blogs from '../services/blogs';
 import { removeBlog } from '../reducers/blogs.reducer';
 import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+
 const Blog = ({ blog }) => {
   const dispatch = useDispatch();
   const blogStyle = {
@@ -48,7 +50,7 @@ const Blog = ({ blog }) => {
       {expanded && (
         <>
           <p>
-            <a href={blog.url}>{blog.url}</a>
+            <NavLink to={blog.id}>{blog.title}</NavLink>
           </p>
           <div>
             Likes: {blog.likes}

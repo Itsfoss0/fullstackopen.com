@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { notify } from '../reducers/notitification.reducer';
 import { loginUser } from '../services/auth';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const message = useSelector((state) => state.notification);
   const submitForm = async (event) => {
     event.preventDefault();
@@ -15,6 +17,7 @@ const LoginForm = () => {
         const user = JSON.stringify(resp.data);
         dispatch(notify('Logged In successfully', 2000));
         localStorage.setItem('user', user);
+        navigate('/blogs');
       }
     } catch (error) {
       dispatch(notify('Invalid username or password', 2000));
