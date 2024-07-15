@@ -1,11 +1,56 @@
-query Count {
+query {
   authors: authorCount
   books: bookCount
 }
 
+query {
+  books: allBooks {
+    title
+    author
+    published
+    genres
+  }
+}
+query {
+  uncleBob: allBooks(author: "Robert Martin") {
+    title
+    author
+    published
+  }
+}
 
-query books {
-    allBooks {
-        title
-    }
+query AllBooks {
+  books: allBooks(genre: "classic") {
+    title
+    id
+    published
+    author
+  }
+}
+query AllBooks {
+  books: allBooks(genre: "design") {
+    title
+    id
+    published
+    author
+  }
+}
+
+mutation AddBook(
+  $title: String!
+  $author: String!
+  $published: Int!
+  $genres: [String!]!
+) {
+  book: addBook(
+    title: $title
+    author: $author
+    published: $published
+    genres: $genres
+  ) {
+    genres
+    id
+    published
+    title
+  }
 }
