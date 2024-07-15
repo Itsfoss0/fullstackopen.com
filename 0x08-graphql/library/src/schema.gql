@@ -1,0 +1,18 @@
+type Author {
+  name: String!
+  born: Int
+  id: ID!
+}
+
+type Book {
+  title: String!
+  author: String!
+  published: Int!
+  genres: [String!]!
+  id: ID!
+}
+
+type Query {
+  bookCount: Int!
+  authorCount: Int!
+}

@@ -1,0 +1,11 @@
+query Count {
+  authors: authorCount
+  books: bookCount
+}
+
+
+query books {
+    allBooks {
+        title
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "A simple library API in graphql",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "graphql": "^16.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
