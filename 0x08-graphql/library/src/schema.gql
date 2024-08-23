@@ -7,7 +7,7 @@ type Author {
 
 type Book {
   title: String!
-  author: String!
+  author: Author!
   published: Int!
   genres: [String!]!
   id: ID!
@@ -27,5 +27,7 @@ type Mutation {
     genres: [String!]!
   ): Book!
 
-  editAuthor(author: String!, setBornTo: Int!): Author
+
+  addAuthor: (name: String!, born: Int): Author
+  editAuthorById(id: ID!, born: Int!): Author
 }

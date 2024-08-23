@@ -7,19 +7,18 @@ const typeDefs = `#graphql
   }
 
   type Book {
-      title: String!
-      author: String!
-      published: Int!
-      genres: [String!]!
-      id: ID!
-  }
-
+  title: String!
+  author: Author!
+  published: Int!
+  genres: [String!]!
+  id: ID!
+}
   type Query {
     bookCount: Int!
     authorCount: Int!
-    allBooks(author: String, genre: String): [Book!]!
+    allBooks(author: String genre: String): [Book!]!
     allAuthors: [Author!]!
-  }, 
+  }
   type Mutation {
       addBook (
           title: String!
@@ -27,8 +26,8 @@ const typeDefs = `#graphql
           published: Int!
           genres: [String!]!
       ) : Book!
-
-      editAuthor(author: String!, setBornTo: Int!) : Author
+      addAuthor (name: String! born: Int): Author
+      editAuthorById(id: ID! born: Int!): Author
   }
 `;
 
