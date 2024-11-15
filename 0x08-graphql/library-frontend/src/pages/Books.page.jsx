@@ -1,9 +1,9 @@
-import { useQuery } from "@apollo/client";
-import { Table, Container, Row, Col } from "react-bootstrap";
-import { ALL_BOOKS } from "../graphql/operations";
-import Button from "react-bootstrap/Button";
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useQuery } from '@apollo/client';
+import { Table, Container, Row, Col } from 'react-bootstrap';
+import { ALL_BOOKS } from '../graphql/operations';
+import Button from 'react-bootstrap/Button';
+import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 const BooksPage = () => {
   const [displayFilter, setDisplayFilter] = useState(null);
@@ -35,22 +35,24 @@ const BooksPage = () => {
       <Container>
         <Row>
           <Col>
-            {displayFilter ? (
-              <h2 className="my-4"> Books on {displayFilter}</h2>
-            ) : (
-              <h2 className="my-4">All Books</h2>
-            )}
+            {displayFilter
+              ? (
+                <h2 className='my-4'> Books on {displayFilter}</h2>
+                )
+              : (
+                <h2 className='my-4'>All Books</h2>
+                )}
             {filters.map((tag) => (
               <Button
-                className="mx-2 mb-2"
-                variant="secondary"
+                className='mx-2 mb-2'
+                variant='secondary'
                 key={tag}
                 onClick={() => filterBooks(tag)}
               >
                 {tag}
               </Button>
             ))}
-            <Button className="mx-2 mb-2" variant="info" onClick={() => filterBooks(data.user.favoriteGenre)}>Favourites</Button>
+            <Button className='mx-2 mb-2' variant='info' onClick={() => filterBooks(data.user.favoriteGenre)}>Favourites</Button>
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -72,8 +74,8 @@ const BooksPage = () => {
           </Col>
         </Row>
       </Container>
-      <NavLink to="/books/new" className="nav-link">
-        <Button className="mx-2" variant="primary">
+      <NavLink to='/books/new' className='nav-link'>
+        <Button className='mx-2' variant='primary'>
           New Book
         </Button>
       </NavLink>
