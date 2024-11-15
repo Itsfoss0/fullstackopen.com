@@ -39,9 +39,10 @@ const Authors = () => {
 
   const handleSaveChanges = async () => {
     const payload = {
-      author: currentAuthor.name,
+      author: currentAuthor.id,
       setBornTo: parseInt(currentAuthor.born)
     };
+    console.log(payload);
     await editAuthor({ variables: payload });
     handleCloseModal();
   };
@@ -62,7 +63,7 @@ const Authors = () => {
             </thead>
             <tbody>
               {authors.map((author) => (
-                <tr key={author.name}>
+                <tr key={author.id}>
                   <td>{author.name}</td>
                   <td>{author.born}</td>
                   <td>{author.bookCount}</td>
@@ -95,7 +96,7 @@ const Authors = () => {
               <Form.Group controlId='formAuthorBorn'>
                 <Form.Label>Born</Form.Label>
                 {/* value prop  should not be null, assing an empty string for authors that
-                dont have a YOB on their profile from the backend to remove console warnings*/}
+                dont have a YOB on their profile from the backend to remove console warnings */}
                 <Form.Control
                   type='text'
                   value={currentAuthor.born === null ? '' : currentAuthor.born}

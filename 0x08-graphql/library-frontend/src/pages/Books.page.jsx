@@ -6,10 +6,10 @@ import { NavLink } from 'react-router-dom';
 
 const BooksPage = () => {
   const { loading, data, error } = useQuery(ALL_BOOKS);
-  
+
   if (loading) return <h2>Loading...please wait</h2>;
   if (error) return <h2>An error occured {error.message}</h2>;
-  
+
   const books = data?.books || [];
 
   return (
