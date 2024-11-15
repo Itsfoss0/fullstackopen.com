@@ -5,7 +5,6 @@ import useAuth from '../hooks/auth.hook';
 const Navigation = () => {
   const { getUser, logout } = useAuth();
   const authUser = getUser();
-  console.log(authUser);
   return (
     <Nav className='my-1'>
       <Nav.Item>
