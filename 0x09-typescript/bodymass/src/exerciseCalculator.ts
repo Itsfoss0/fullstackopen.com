@@ -1,0 +1,41 @@
+/*
+ * You should exercise more
+ * This functions finds out
+ * how often you should exercise
+ *
+ */
+
+import { ExerciseResponse } from "./types";
+
+const sumOfArray = (items: number[]): number => {
+  let total = 0;
+
+  for (const val of items) {
+    total += val;
+  }
+  return total;
+};
+
+const calculateExercises = (
+  exerciseDays: number[],
+  target: number
+): ExerciseResponse => {
+  const periodLength = exerciseDays.length;
+  const trainingDays = exerciseDays.filter((day) => day > 0).length;
+  const average = sumOfArray(exerciseDays) / 7;
+  const success = average >= target;
+  const rating = average >= 2 ? 3 : 1;
+  const ratingDescription = rating > 1 ? "Good work" : "You could do better";
+
+  return {
+    periodLength,
+    trainingDays,
+    target,
+    average,
+    success,
+    rating,
+    ratingDescription,
+  };
+};
+
+console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
