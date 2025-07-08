@@ -25,7 +25,7 @@ export const parseArguments = (args: string[]): BmiArguments => {
  * of numbers
  */
 
-export const parseExerciseDays = (args: string[]): number[] => {
+export const parseExerciseDays = (args: string[] | number[]): number[] => {
   const exerciseDays = [];
 
   for (const item of args) {

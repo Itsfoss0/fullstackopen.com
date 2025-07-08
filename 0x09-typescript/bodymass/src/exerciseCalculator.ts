@@ -17,7 +17,7 @@ const sumOfArray = (items: number[]): number => {
   return total;
 };
 
-const calculateExercises = (
+export const calculateExercises = (
   exerciseDays: number[],
   target: number
 ): ExerciseResponse => {
@@ -39,17 +39,19 @@ const calculateExercises = (
   };
 };
 
-const args = process.argv.slice(2);
+if (require.main === module) {
+  const args = process.argv.slice(2);
 
-try {
-  const exerciseDays = parseExerciseDays(args);
-  console.log(calculateExercises(exerciseDays, exerciseDays[0]));
-} catch (error) {
-  let errorMessage = "An error occured: ";
+  try {
+    const exerciseDays = parseExerciseDays(args);
+    console.log(calculateExercises(exerciseDays, exerciseDays[0]));
+  } catch (error) {
+    let errorMessage = "An error occured: ";
 
-  if (error instanceof Error) {
-    errorMessage += error.message;
+    if (error instanceof Error) {
+      errorMessage += error.message;
+    }
+
+    console.log(errorMessage);
   }
-
-  console.log(errorMessage);
 }
