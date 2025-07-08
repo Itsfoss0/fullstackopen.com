@@ -18,3 +18,23 @@ export const parseArguments = (args: string[]): BmiArguments => {
     throw new Error("Provided values are not numbers");
   }
 };
+
+/**
+ *
+ * Parse days of exercises as an array
+ * of numbers
+ */
+
+export const parseExerciseDays = (args: string[]): number[] => {
+  const exerciseDays = [];
+
+  for (const item of args) {
+    if (!isNaN(Number(item))) {
+      exerciseDays.push(Number(item));
+    } else {
+      throw new Error(`'${item}' is not a valid number`);
+    }
+  }
+
+  return exerciseDays;
+};

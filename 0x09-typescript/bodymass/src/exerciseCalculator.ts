@@ -6,6 +6,7 @@
  */
 
 import { ExerciseResponse } from "./types";
+import { parseExerciseDays } from "./utils";
 
 const sumOfArray = (items: number[]): number => {
   let total = 0;
@@ -38,4 +39,17 @@ const calculateExercises = (
   };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+const args = process.argv.slice(2);
+
+try {
+  const exerciseDays = parseExerciseDays(args);
+  console.log(calculateExercises(exerciseDays, exerciseDays[0]));
+} catch (error) {
+  let errorMessage = "An error occured: ";
+
+  if (error instanceof Error) {
+    errorMessage += error.message;
+  }
+
+  console.log(errorMessage);
+}
