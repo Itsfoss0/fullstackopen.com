@@ -8,6 +8,8 @@ const PORT: number = 3001;
 
 const app: express.Application = express();
 
+app.use(express.json());
+
 const allowedOrigins: string[] = [
   "http://localhost:5173",
   "http://localhost:5174",

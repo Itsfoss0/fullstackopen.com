@@ -13,4 +13,15 @@ export interface PatientType {
   ssn: string;
 }
 
+export enum Gender {
+  Male = "male",
+  Female = "female",
+  Other = "other",
+}
+
+export type NewPatient = Omit<PatientType, "id">;
+
+export interface ErrorResponse {
+  error: string;
+}
 export type PrivatePatientInfo = Omit<PatientType, "ssn">;
