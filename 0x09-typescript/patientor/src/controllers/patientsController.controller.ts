@@ -3,6 +3,7 @@ import { PrivatePatientInfo, PatientType, ErrorResponse } from "../types";
 import { Response, Request } from "express";
 import { parseNewPatientEntry } from "../utils/parsers.util";
 import { v4 as uuid } from "uuid";
+import { ZodError } from "zod";
 
 const getPatientInfoWithoutPrivateFields = (): PrivatePatientInfo[] => {
   return patientData.map(({ id, name, gender, dateOfBirth, occupation }) => ({
@@ -45,9 +46,9 @@ const addPatient = (
     patientData.push(newPatient);
     return res.status(201).json(newPatient);
   } catch (error: unknown) {
-    let errorMessage = "An Error occured: ";
-    if (error instanceof Error) {
-      errorMessage += error.message;
+    const errorMessage = "An Error occured: Some fields are missing";
+    if (error instanceof ZodError) {
+      return res.status(400).json({ error: JSON.stringify(error.issues) });
     }
     return res.status(400).json({ error: errorMessage });
   }

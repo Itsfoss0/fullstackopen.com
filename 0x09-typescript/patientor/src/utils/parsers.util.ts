@@ -1,5 +1,6 @@
-import { NewPatient, Gender } from "../types";
+import { NewPatientSchemaZod } from "../types";
 
+/*
 const isString = (value: unknown): value is string => {
   return typeof value === "string" || value instanceof String;
 };
@@ -50,27 +51,12 @@ const parseOccupation = (occupation: unknown): string => {
   }
   return occupation;
 };
+*/
 
 export const parseNewPatientEntry = (object: unknown) => {
   if (!object || typeof object !== "object") {
     throw new Error(`Incorrect or missing details in ${object}`);
   }
 
-  if (
-    "name" in object &&
-    "ssn" in object &&
-    "gender" in object &&
-    "occupation" in object &&
-    "dateOfBirth" in object
-  ) {
-    const newPatient: NewPatient = {
-      name: parseName(object.name),
-      ssn: parseSSN(object.ssn),
-      dateOfBirth: parseDateOfBirth(object.dateOfBirth),
-      occupation: parseOccupation(object.occupation),
-      gender: parseGender(object.gender),
-    };
-    return newPatient;
-  }
-  throw new Error("Incorrect data, some fields are missing");
+  return NewPatientSchemaZod.parse(object);
 };
